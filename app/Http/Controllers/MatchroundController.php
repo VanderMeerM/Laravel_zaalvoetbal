@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Models\Matchround;
+use App\Models\Dates;
+
 
 use Illuminate\Http\Request;
 
@@ -14,14 +16,40 @@ class MatchroundController extends Controller
         {
 
 
-     $players = Player::all();
+     //$players = Player::all();
 
-     $matchr_player = Matchround::all();
-     
-        return view('index', [
-        'players' => $players,
-        'matchround' => $matchr_player
-               
+     $dates = Dates::all();
+
+      return view('index', [
+       'dates' => $dates
+                       
         ]);
+    }
+
+    public function show($id) 
+    {
+
+      $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
+
+       return view('show',  [
+        'matchround' => $matchround_dates,
+       ]);
+    }
+
+    public function edit($id) 
+    {
+
+    $matchround = Matchround::find($id);
+
+    $curr_presence = $matchround->present;
+  
+    $matchround->update([
+      'present' => !$curr_presence
+    ]);
+
+    return to_route('voetballers.show', [
+        'voetballer' => $matchround->date_id
+    ]);
+   
     }
 }

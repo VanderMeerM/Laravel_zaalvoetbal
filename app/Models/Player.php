@@ -9,7 +9,9 @@ class Player extends Model
 
 {
 
-     public function matchround(): HasOne 
+    protected $fillable = ['name', 'email', 'password'];
+
+   public function matchround(): HasOne 
     {
         return $this->hasOne(Matchround::class);
     }

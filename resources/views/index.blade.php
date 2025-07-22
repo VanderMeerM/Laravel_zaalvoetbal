@@ -7,31 +7,20 @@
 
 <div class="center">
 
-<select>
-
-<option> 4-9-2025</option>
-<option> 11-9-2025</option>
-<option> 18-9-2025</option>
-</select>
+@foreach ($dates as $date )
 
 
-<ul>
+<div class="dateblock"> 
 
+<a href= "{{ route('voetballers.show', ['voetballer' => $date->Id])}}" >
 
-    @foreach($players as $player)
+{{  $date->date }}
 
-   <!-- <li> {{ $player->name }} </li> -->
+</a>
+</div>
 
-       @foreach($matchround as $match)
+@endforeach
 
-        @if ($match->player_id == $player->id) <p> {{ $player->name }} <button> Aan-/Afwezig</button></p>
-    @endif 
-    
-    @endforeach
-    @endforeach
-
-    
-</ul>
 
 </div>
 

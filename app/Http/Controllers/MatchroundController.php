@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Models\Matchround;
+use App\Models\Team;
 use App\Models\Dates;
 
 
@@ -30,9 +31,11 @@ class MatchroundController extends Controller
     {
 
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
+      $teams = Team::all();
 
        return view('show',  [
         'matchround' => $matchround_dates,
+        'teams' => $teams
        ]);
     }
 

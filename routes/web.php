@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MatchroundController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\TeamController;
 use App\Models\Player;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,8 @@ Route::post('/players', function() {
 });
   
 Route::resource('/players', PlayerController::class);
+
+Route::resource('/teams', TeamController::class);
 
 Route::resource('/voetballers', MatchroundController::class)
 ->only(['index', 'show', 'edit']);

@@ -14,9 +14,10 @@
 <table>
 
 <tr>
-<th>Aanwezig</th>
-<th>Afwezig</th>
-<th></th>
+<th>Speler</th>
+<th>Aanwezigheid</th>
+<th>Kleur</th>
+
 
 </tr>
 
@@ -24,26 +25,31 @@
     
 <tr>
 
-@if ($match->present) 
-
 <td>
  {{  $match->player->name }} 
 </td>
 
-<td></td>
+<td> 
+
+@if ($match->present) 
+
+<a style="color:green" href="/voetballers/{{ $match->id }}/edit">Aanwezig </a> 
 
 @else
-<td></td>
-
-<td>
-{{  $match->player->name }} 
-</td>
+<a style="color:red" href="/voetballers/{{ $match->id }}/edit">Afwezig </a> 
 
 @endif
 
+</td>
+
+
 <td>
 
-<a href="/voetballers/{{ $match->id }}/edit">Aan-/Afwezig </a> 
+<select>
+    @foreach($teams as $team) 
+     <option> {{ $team->color }} </option> 
+     @endforeach
+</select>
 
 </td>
 

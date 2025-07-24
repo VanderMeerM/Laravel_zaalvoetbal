@@ -24,4 +24,9 @@ public function date(): BelongsTo
         return $this->belongsTo(Dates::class);
     }
 
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
 }

@@ -40,15 +40,14 @@
 
 <div class="center">
 
-
-@foreach ($players as $player )
+@foreach ($players as $player)
 
 
 <div class="dateblock"> 
 
 <a href= "{{ route('players.show', ['player' => $player->id])}}" >
 
-{{  $player->name }}
+{{  $player->firstname }} {{ $player->lastname}}
 
 </a>
 

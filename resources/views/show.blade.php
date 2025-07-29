@@ -13,35 +13,33 @@
 
 <table>
 
+
 <tr>
-<th>Speler</th>
-<th>Aanwezigheid</th>
-<th>Kleur</th>
-
-
+<th>Aanwezig ({{ $num_present }})</th>
+<th>Afwezig ({{ $num_absent }})</th>
+<th>Team</th>
 </tr>
 
 @foreach($matchround as $match)
     
 <tr>
 
-<td>
- {{  $match->player->name }} 
-</td>
-
-<td> 
-
 @if ($match->present) 
 
-<a style="color:green" href="/voetballers/{{ $match->id }}/edit">Aanwezig </a> 
+<td> 
+<a style="color:green" href="/voetballers/{{ $match->id }}/edit">{{  $match->player->firstname }} </a> 
+</td>
+<td></td>
 
 @else
-<a style="color:red" href="/voetballers/{{ $match->id }}/edit">Afwezig </a> 
 
-@endif
+<td></td>
 
+<td>
+<a style="color:red" href="/voetballers/{{ $match->id }}/edit">{{  $match->player->firstname }} </a> 
 </td>
 
+@endif
 
 <td>
 

@@ -7,24 +7,29 @@
 
 <body>
 
-<div class="center">
+<div class="w-128 max-w-lg">
 
 <form method="post" action="/players">
   @csrf
   <div class="space-y-12">
    
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-          <label for="name" class="block text-sm/6 font-medium text-gray-900">Naam</label>
-          <div class="mt-2">
-            <div class="flex items-center w-96 m-auto rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-              <div class="shrink-0 select-none text-base text-gray-500 sm:text-sm/6"></div>
-              <input id="name" type="text" name="name"class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6" />
-            </div>
-          </div>
-        </div>
-        </div>
-
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-64 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block tracking-wide text-xs font-bold mb-2" for="firstname">
+        Voornaam
+      </label>
+      <input id="firstname" name="firstname" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text">
+      </div>
+    <div class="w-full md:w-1/2 px-3">
+      <label class="block tracking-wide text-xs font-bold mb-2" for="lastname">
+        Achternaam
+      </label>
+      <input id="lastname" name="lastname" class="appearance-none block w-full border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text">
+    </div>
+  </div>
+</div>
+</div>
+             
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-4">
           <label for="email" class="block text-sm/6 font-medium text-gray-900">E-mailadres</label>

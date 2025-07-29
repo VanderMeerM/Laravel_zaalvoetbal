@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Models\Matchround;
 use App\Models\Team;
-use App\Models\Dates;
+use App\Models\Date;
 
 
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class MatchroundController extends Controller
 
      //$players = Player::all();
 
-     $dates = Dates::all();
+     $dates = Date::all();
 
       return view('index', [
        'dates' => $dates
@@ -31,10 +31,15 @@ class MatchroundController extends Controller
     {
 
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
+      $num_present = $matchround_dates->where('present', '=', '1')->count();
+      $num_absent = $matchround_dates->where('present', '=', '0')->count();
+
       $teams = Team::all();
 
        return view('show',  [
         'matchround' => $matchround_dates,
+        'num_present' => $num_present,
+        'num_absent' => $num_absent,
         'teams' => $teams
        ]);
     }

@@ -9,7 +9,7 @@ class Player extends Model
 
 {
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['firstname', 'lastname', 'email', 'password'];
 
    public function matchround(): HasOne 
     {

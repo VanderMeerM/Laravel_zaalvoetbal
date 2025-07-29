@@ -12,7 +12,7 @@
 
 <div class="dateblock"> 
 
-<a href= "{{ route('voetballers.show', ['voetballer' => $date->Id])}}" >
+<a href= "{{ route('voetballers.show', ['voetballer' => $date->id])}}" >
 
 {{  $date->date }}
 

@@ -1,28 +1,26 @@
 
-@extends('CSS.app')
+@extends( 'CSS.app')
 
-<script src="https://cdn.tailwindcss.com"></script>
+   <!-- @vite('resources/css/app.css') -->
+
+  <script src="https://cdn.tailwindcss.com"></script> 
 
 <body>
-
-<div class="center">
 
 @foreach ($dates as $date )
 
 
-<div class="dateblock"> 
+<x-dateblock> 
 
 <a href= "{{ route('voetballers.show', ['voetballer' => $date->id])}}" >
 
 {{  $date->date }}
 
 </a>
-</div>
+</x-dateblock>
 
 @endforeach
 
-
-</div>
 
 </body>
 </html>

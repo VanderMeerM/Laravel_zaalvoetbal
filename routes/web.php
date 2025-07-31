@@ -30,6 +30,9 @@ Route::get('/voetballers', action: [MatchroundController::class, 'show'])->name(
 
 Route::patch('/voetballers/{$id}/edit', action: [MatchroundController::class, 'edit'])->name(name: 'edit');
 
+Route::patch('/voetballers/change_team/{$id}', action: [MatchroundController::class, 'change_team'])->name(name: 'change_team');
+
+
 Route::resource( '/dates', DateController::class); 
 
 Route::post('/dates/create', function() {
@@ -74,4 +77,4 @@ Route::post('/players', function() {
 Route::resource('/teams', TeamController::class);
 
 Route::resource('/voetballers', MatchroundController::class)
-->only(['index', 'show', 'edit']);
+->only(['index', 'show', 'edit', 'change_team']);

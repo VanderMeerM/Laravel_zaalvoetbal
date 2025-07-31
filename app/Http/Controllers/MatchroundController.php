@@ -58,6 +58,31 @@ class MatchroundController extends Controller
     return to_route('voetballers.show', [
         'voetballer' => $matchround->date_id
     ]);
+  }
+
+      public function change_team($id) 
+    {
+
+    $matchround = Matchround::find($id);
+
+    $current_team = $matchround->team_id;
+  
+     if ($current_team == 1) {
+
+      $matchround->update([    
+      'team_id' => 2
+      ]);
+    }
+    else {
+      $matchround->update([    
+      'team_id' => 1
+      ]);
+
+    }
+
+    return to_route('voetballers.show', [
+        'voetballer' => $matchround->date_id
+    ]);
    
     }
 }

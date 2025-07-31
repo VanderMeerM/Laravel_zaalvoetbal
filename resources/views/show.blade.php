@@ -8,7 +8,11 @@
 
 <div class="center">
 
+<x-center>
+
 <a href="{{ route('voetballers.index') }}">Terug naar overzicht </a>
+
+</x-center>
 
 
 <table>
@@ -43,11 +47,11 @@
 
 <td>
 
-<select>
-    @foreach($teams as $team) 
-     <option> {{ $team->color }} </option> 
-     @endforeach
-</select>
+@if ($match->present) 
+
+<a href="/voetballers/change_team/{{ $match->id }}"> {{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
+
+@endif
 
 </td>
 

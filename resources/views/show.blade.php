@@ -31,7 +31,7 @@
 @if ($match->present) 
 
 <td> 
-<a style="color:green" href="/voetballers/{{ $match->id }}/edit">{{  $match->player->firstname }} </a> 
+<a style="color:green" href="/voetballers/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
 </td>
 <td></td>
 
@@ -40,7 +40,7 @@
 <td></td>
 
 <td>
-<a style="color:red" href="/voetballers/{{ $match->id }}/edit">{{  $match->player->firstname }} </a> 
+<a style="color:red" href="/voetballers/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
 </td>
 
 @endif

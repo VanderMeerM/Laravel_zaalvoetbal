@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -17,11 +18,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+   
+     protected $fillable = ['firstname', 'lastname', 'email', 'password'];
+
+   public function matchround(): HasOne 
+    {
+        return $this->hasOne(Matchround::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

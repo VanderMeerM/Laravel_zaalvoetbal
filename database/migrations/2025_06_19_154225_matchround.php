@@ -14,7 +14,9 @@ return new class extends Migration
          Schema::create('matchrounds', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date');
-            $table->foreignIdFor(\App\Models\Player::class)->constrained();
+            $table->foreignIdFor(\App\Models\User::class)->constrained();
+            $table->foreignIdFor(\App\Models\Team::class)->constrained();
+            $table->foreignIdFor(\App\Models\Date::class)->constrained();
             $table->boolean('present');
             $table->timestamps();
              });

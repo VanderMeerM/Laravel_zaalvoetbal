@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Player;
+use App\Models\Users;
 use App\Models\Matchround;
 use App\Models\Team;
 use App\Models\Date;
@@ -15,9 +15,6 @@ class MatchroundController extends Controller
 {
       public function index()
         {
-
-
-     //$players = Player::all();
 
      $dates = Date::all();
 

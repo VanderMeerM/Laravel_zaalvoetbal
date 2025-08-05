@@ -3,7 +3,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-<nav class="bg-gray-800">
+<nav class="bg-cyan-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -14,10 +14,10 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href= "./players/create" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Nieuwe speler</a>
-            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
+            <a href= "./players/create" class="rounded-md bg-green-900 px-3 py-2 text-sm font-medium text-white">Nieuwe speler</a>
+            <a href="./dates" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Data</a>
+            <a href="./voetballers" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Rondes</a>
+            <!-- <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a> -->
           </div>
         </div>
       </div>
@@ -38,16 +38,15 @@
 
 <body>
 
-<div class="center">
 
-@foreach ($players as $player)
+@foreach ($users as $user)
 
 
 <div class="dateblock"> 
 
-<a href= "{{ route('players.show', ['player' => $player->id])}}" >
+<a href= "{{ route('players.show', ['player' => $user->id])}}" >
 
-{{  $player->firstname }} {{ $player->lastname}}
+{{  $user->firstname }} {{ $user->lastname}}
 
 </a>
 
@@ -55,6 +54,5 @@
 
 @endforeach
 
-</div>
 
 </body>

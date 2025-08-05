@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\MatchroundController;
-use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DateController;
-use App\Models\Player;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use App\Models\Date;
 use App\Models\Matchround;
 use Illuminate\Support\Facades\Route;
@@ -41,12 +41,12 @@ Route::post('/dates/create', function() {
         'date' => '2025-10-09',  // request('date'),
     ]);
 
-   $players = Player::all(); 
+   $users = User::all(); 
 
-    foreach($players as $player) 
+    foreach($users as $user) 
 
         Matchround::create([
-            'player_id' => $player->id,
+            'user_id' => $user->id,
             'present' => 1,
             'team_id' => 1,
             'date_id' => $new_date->id
@@ -55,11 +55,9 @@ Route::post('/dates/create', function() {
         
 })->name('create_date');
 
-Route::resource( '/players', PlayerController::class);
-
 Route::post('/players', function() {
 
- Player::create([
+User::create([
         'firstname' => request('firstname'),
         'lastname' => request('lastname'),
         'email' => request('email'),
@@ -67,12 +65,11 @@ Route::post('/players', function() {
        
     ]);
     
-    $players= Player::orderBy('firstname')->get();
-
-    return view('players.index', compact('players'));
+        return view('users.index');
     
 });
-  
+
+Route::resource( '/players', UserController::class);
 
 Route::resource('/teams', TeamController::class);
 

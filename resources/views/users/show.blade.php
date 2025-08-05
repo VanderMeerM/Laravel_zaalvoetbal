@@ -7,11 +7,11 @@
 <a href = {{ route('players.index') }}>Alle spelers </a>
      
  <div>
-{{ $player->name }}
+{{ $user->name }}
 </div>
 
 <div>
-{{ $player->email }}
+{{ $user->email }}
 </div>
 
 </div>

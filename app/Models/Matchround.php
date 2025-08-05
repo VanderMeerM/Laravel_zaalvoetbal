@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Matchround extends Model
 {
 
-protected $fillable = ['date_id','player_id', 'team_id', 'present'];
+protected $fillable = ['date_id','user_id', 'team_id', 'present'];
     
 
-public function player(): BelongsTo
+public function user(): BelongsTo
     {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo(User::class);
     }
 
 

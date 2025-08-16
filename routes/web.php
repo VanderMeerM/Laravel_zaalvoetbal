@@ -48,7 +48,6 @@ Route::post('/dates/create', function() {
 })->name('create_date');
 */
 
-
 Route::get('/users', function() {
     $users= User::all(); 
 

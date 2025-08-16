@@ -18,11 +18,12 @@ public function user(): BelongsTo
         return $this->belongsTo(User::class);
     }
 
-
+/*
 public function date(): BelongsTo
     {
         return $this->belongsTo(Date::class);
     }
+*/
 
     public function team(): BelongsTo
     {

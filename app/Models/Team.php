@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\MatchroundController;
-use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

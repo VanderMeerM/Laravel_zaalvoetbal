@@ -4,7 +4,7 @@
 
 <div class="center">
 
-<a href = {{ route('players.index') }}>Alle spelers </a>
+<a href = {{ route('users.index') }}>Alle spelers </a>
      
  <div>
 {{ $user->name }}

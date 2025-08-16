@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('date');
             $table->foreignIdFor(\App\Models\User::class)->constrained();
-            $table->foreignIdFor(\App\Models\Team::class)->constrained();
+            $table->foreignIdFor(\App\Models\Team::class);
             $table->foreignIdFor(\App\Models\Date::class)->constrained();
             $table->boolean('present');
             $table->timestamps();

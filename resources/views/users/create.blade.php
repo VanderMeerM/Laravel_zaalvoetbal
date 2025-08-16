@@ -5,7 +5,7 @@
 
 <body>
 
-<form method="post" action="/players">
+<form method="post" action="/users">
   @csrf 
   
      <div class="m-auto border-b border-gray-900/10 pb-12 w-1/2">
@@ -16,6 +16,9 @@
           <div class="mt-2">
             <input id="firstname" type="text" name="firstname" autocomplete="given-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
+          @error('firstname')
+          <p class="text-xs text-red-500 font-semibold mt-1"> {{  $message }}</p>
+          @enderror
         </div>
 
         <div class="sm:col-span-3">
@@ -37,11 +40,22 @@
           <div class="mt-2">
             <input id="password" type="password" name="password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
-        </div>
-
+        </div>  
         
-            <div>           
-              </div>
+        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Admin</label>
+          <div class="mt-2">
+            <input id="isAdmin" type="text" name="isAdmin" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+          </div>
+        </div>   
+        <div>     
+          @if($errors->any())
+          <ul>
+            @foreach($errors->all() as $error)
+          <li>{{  $error }}</li>  
+            @endforeach
+          </ul>    
+          @endif
+     </div>
              
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
@@ -49,6 +63,7 @@
     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opslaan</button>
   </div>
 </form>
+
  
 </body>
 

@@ -7,17 +7,19 @@
 
 <body>
 
+<x-header></x-header>
+
 @foreach ($dates as $date )
 
-
-<x-dateblock> 
+<x-block>
 
 <a href= "{{ route('voetballers.show', ['voetballer' => $date->id])}}" >
 
 {{  $date->date }}
 
 </a>
-</x-dateblock>
+
+</x-block>
 
 @endforeach
 

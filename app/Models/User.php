@@ -6,9 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class User extends Authenticatable
+class User extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -19,7 +21,7 @@ class User extends Authenticatable
      * @var list<string>
      */
    
-     protected $fillable = ['firstname', 'lastname', 'email', 'password'];
+     protected $fillable = ['firstname', 'lastname', 'email', 'password', 'isAdmin'];
 
    public function matchround(): HasOne 
     {

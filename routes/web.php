@@ -14,15 +14,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/voetballers',  function() {
-    return view('index');
-});
-
-
-Route::get('/voetballers', action: [MatchroundController::class, 'index'])-> name('index');
-
-Route::get('/voetballers', action: [MatchroundController::class, 'show']) -> name('show');
 */
   
 Route::get('/voetballers', action: [MatchroundController::class, 'index'])->name('index');
@@ -33,12 +24,13 @@ Route::patch('/voetballers/{$id}/edit', action: [MatchroundController::class, 'e
 Route::patch('/voetballers/change_team/{$id}', action: [MatchroundController::class, 'change_team'])->name(name: 'change_team');
 
 
+/*
 Route::resource( '/dates', DateController::class); 
 
 Route::post('/dates/create', function() {
 
  $new_date = Date::create([
-        'date' => '2025-10-09',  // request('date'),
+        'date' => '2025-10-16' , // request('date'),
     ]);
 
    $users = User::all(); 
@@ -54,24 +46,27 @@ Route::post('/dates/create', function() {
         ]);
         
 })->name('create_date');
+*/
 
-Route::post('/players', function() {
 
-User::create([
-        'firstname' => request('firstname'),
-        'lastname' => request('lastname'),
-        'email' => request('email'),
-        'password' => Hash::make(request('password'))
-       
-    ]);
-    
-        return view('users.index');
-    
+Route::get('/users', function() {
+    $users= User::all(); 
+
+    return view('users.index', compact('users'));
 });
 
-Route::resource( '/players', UserController::class);
 
-Route::resource('/teams', TeamController::class);
+Route::get('/users/create', function() {
+return view('users.create');
+});
 
-Route::resource('/voetballers', MatchroundController::class)
-->only(['index', 'show', 'edit', 'change_team']);
+
+Route::post( '/users', [UserController::class, 'store']);
+
+Route::delete( '/users/delete', action: [UserController::class, 'destroy'])->name('delete_user');
+
+Route::resource( 'users', UserController::class);
+
+//Route::resource('/teams', TeamController::class);
+
+//Route::resource('/voetballers', MatchroundController::class) ->only(['index', 'show', 'edit', 'change_team']);

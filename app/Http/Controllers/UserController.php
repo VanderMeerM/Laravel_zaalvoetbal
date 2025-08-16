@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
    public function index()
     {
 
-       $users = User::orderBy('firstname')->get();
+       $users = User::get();
 
         return view('users.index', compact('users'));
     }
@@ -28,9 +28,25 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+         request()->validate([
+        'firstname' => ['required'],
+        'lastname' => ['required'],
+
+    ]);
+
+User::create(   
+     [
+        'firstname' => request('firstname'),
+        'lastname' => request('lastname'),
+        'email' => request('email'),
+        'password' => Hash::make(request('password')),
+        'isAdmin' => request('isAdmin'),
+               
+    ]);
+    
+     return to_route('users.index');
     }
 
     /**
@@ -42,7 +58,7 @@ class UserController extends Controller
         //$player = Player::select()->where('id', '=', $id)->get();
         $user = User::find($id);
        
-              return view('users.show', ['user' => $user]);
+              return view('/users.show', ['user' => $user]);
     }
        
 
@@ -65,8 +81,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        User::destroy($user);
+        
+          return view('users.index'); 
     }
 }

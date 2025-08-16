@@ -3,54 +3,30 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 
-<nav class="bg-cyan-800">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-       
-      </div>
-     
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href= "./players/create" class="rounded-md bg-green-900 px-3 py-2 text-sm font-medium text-white">Nieuwe speler</a>
-            <a href="./dates" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Data</a>
-            <a href="./voetballers" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Rondes</a>
-            <!-- <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a> -->
-          </div>
-        </div>
-      </div>
-     
+<x-header>
+</x-header>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div id="mobile-menu" class="sm:hidden">
-    <div class="space-y-1 px-2 pt-2 pb-3">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a href="#" aria-current="page" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
-    </div>
-  </div>
-</nav>
+<x-addbtn>
+Nieuwe speler
+</x-addbtn>
 
 
 <body>
 
-
 @foreach ($users as $user)
 
+<x-block>
 
-<div class="dateblock"> 
+<a href= "{{ route('users.show', ['user' => $user->id])}}" >
 
-<a href= "{{ route('players.show', ['player' => $user->id])}}" >
-
-{{  $user->firstname }} {{ $user->lastname}}
+{{  $user->firstname }} {{ $user->lastname}}   
 
 </a>
 
-</div>
+</x-block>
+
+ <a href=" {{ route('delete_user', ['id' => $user->id]) }}">Verwijder</a>
+
 
 @endforeach
 

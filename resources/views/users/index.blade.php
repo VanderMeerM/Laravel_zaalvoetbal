@@ -7,13 +7,15 @@
 </x-header>
 
 <x-addbtn>
-Nieuwe speler
+Nieuwe speler toevoegen
 </x-addbtn>
 
 
 <body>
 
 @foreach ($users as $user)
+
+<div style="display: flex">
 
 <x-block>
 
@@ -25,10 +27,13 @@ Nieuwe speler
 
 </x-block>
 
- <a href=" {{ route('delete_user', ['id' => $user->id]) }}">Verwijder</a>
+ <a class="flex-initial" href=" {{ route('delete_user', ['id' => $user->id]) }}">Verwijder</a>
 
+</div>
 
 @endforeach
+
+
 
 
 </body>

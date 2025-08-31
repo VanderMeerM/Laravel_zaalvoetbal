@@ -59,12 +59,26 @@ Route::get('/users/create', function() {
 return view('users.create');
 });
 
-
 Route::post( '/users', [UserController::class, 'store']);
 
-Route::delete( '/users/delete', action: [UserController::class, 'destroy'])->name('delete_user');
+Route::delete( '/users/delete',  [UserController::class, 'destroy'])->name('delete_user');
 
 Route::resource( 'users', UserController::class);
+
+
+Route::get('/dates', function() {
+    $dates= Date::all(); 
+
+    return view('dates.index', compact('dates'));
+});
+
+
+Route::get('/dates/create', function() {
+return view('dates.create');
+});
+
+Route::resource( 'dates', DateController::class);
+
 
 //Route::resource('/teams', TeamController::class);
 

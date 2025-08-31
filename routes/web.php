@@ -59,7 +59,7 @@ Route::get('/users/create', function() {
 return view('users.create');
 });
 
-Route::post( '/users', [UserController::class, 'store']);
+Route::post('/users', [UserController::class, 'store']);
 
 Route::delete( '/users/delete',  [UserController::class, 'destroy'])->name('delete_user');
 
@@ -76,6 +76,9 @@ Route::get('/dates', function() {
 Route::get('/dates/create', function() {
 return view('dates.create');
 });
+
+Route::post('/dates/store', [DateController::class, 'store']);
+
 
 Route::resource( 'dates', DateController::class);
 

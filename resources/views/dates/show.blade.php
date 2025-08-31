@@ -6,11 +6,17 @@
 
 <a href = {{ route('dates.index') }}>Alle data </a>
     
-@foreach ($match as $mt )
+@foreach ($match as $mt)
 
- <div>
+@php
 
-{{ $mt->date_id}}
+$player_name = \App\Models\User::find($mt->user_id);
+
+@endphp 
+
+<div>
+
+{{ $player_name->firstname }} {{ $player_name->lastname }}
 
 </div>
 

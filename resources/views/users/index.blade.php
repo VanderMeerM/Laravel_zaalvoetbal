@@ -27,13 +27,16 @@ Nieuwe speler toevoegen
 
 </x-block>
 
- <a class="flex-initial" href=" {{ route('delete_user', ['id' => $user->id]) }}">Verwijder</a>
+ <button form="delete_user" class="flex-initial text-red-500 mr-20">Verwijder </button>
 
 </div>
 
+<form id="delete_user" method="post" action='/users/{{ $user->id }}' class="hidden">
+@csrf
+@method('DELETE')
+
+</form>
+
 @endforeach
-
-
-
 
 </body>

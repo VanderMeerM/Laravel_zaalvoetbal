@@ -44,15 +44,14 @@ class DateController extends Controller
        
     ]);
 
-Date::create(   
+$new_date = Date::create(   
      [
         'date' => request('date'),
         'created_at' => now()
                       
     ]);
 
-    $users = User::all(); 
-    $lastdate = Date::latest('id');
+ $users = User::all(); 
 
  foreach ($users as $user) {
 
@@ -61,7 +60,7 @@ Date::create(
             'date' => now(),
             'user_id' => $user->id,
             'team_id' => 1,
-            'date_id' => Date::latest(),  //12,
+            'date_id' => $new_date->id, 
             'present' => 1,
             'created_at' => now()
         ]
@@ -69,6 +68,18 @@ Date::create(
     }
     
      return to_route('dates.index');
+    }
+
+     public function destroy($id)
+    {
+        $date = Date::findOrFail($id);
+
+        $matchesdate=Matchround::where('date_id', '=', $date->id);
+        $matchesdate->delete();    
+        
+        $date->delete();
+        
+          return redirect('/dates'); 
     }
 
 };  

@@ -61,7 +61,7 @@ return view('users.create');
 
 Route::post('/users', [UserController::class, 'store']);
 
-Route::delete( '/users/delete',  [UserController::class, 'destroy'])->name('delete_user');
+Route::delete( '/users/{id}',  [UserController::class, 'destroy']);
 
 Route::resource( 'users', UserController::class);
 

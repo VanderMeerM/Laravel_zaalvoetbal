@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Date;
+use App\Models\Matchround;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -36,7 +38,7 @@ class UserController extends Controller
 
     ]);
 
-User::create(   
+$new_user = User::create(   
      [
         'firstname' => request('firstname'),
         'lastname' => request('lastname'),
@@ -45,6 +47,22 @@ User::create(
         'isAdmin' => request('isAdmin'),
                
     ]);
+
+ $dates = Date::all(); 
+
+ foreach ($dates as $date) {
+
+    Matchround::create(
+        [
+            'date' => now(),
+            'user_id' => $new_user->id,
+            'team_id' => 1,
+            'date_id' => $date->id, 
+            'present' => 1,
+            'created_at' => now()
+        ]
+        );
+    }
     
      return to_route('users.index');
     }
@@ -56,7 +74,7 @@ User::create(
     {
 
         //$player = Player::select()->where('id', '=', $id)->get();
-        $user = User::find($id);
+        $user = User::findOrFail($id);
        
               return view('/users.show', ['user' => $user]);
     }
@@ -83,10 +101,13 @@ User::create(
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        User::destroy($user);
+        $matchesuser=Matchround::where('user_id', '=', $user->id);
+        $matchesuser->delete();    
         
-          return view('users.index'); 
+        $user->delete();
+        
+          return redirect('/users'); 
     }
 }

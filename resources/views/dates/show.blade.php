@@ -4,24 +4,71 @@
 
 <div class="center">
 
-<a href = {{ route('dates.index') }}>Alle data </a>
+   
+@extends('CSS.app')
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<body>
+
+
+<div class="center">
+
+<x-center>
+
+<a href="{{ route('dates.index') }}">Terug naar overzicht speeldata </a>
+
+</x-center>
+
+
+
+<table>
+
+
+<tr>
+<th>Aanwezig ({{ $num_present }})</th>
+<th>Afwezig ({{ $num_absent }})</th>
+<th>Team</th>
+</tr>
+
+@foreach($matchround as $match)
     
-@foreach ($match as $mt)
+<tr>
 
-@php
+@if ($match->present) 
 
-$player_name = \App\Models\User::find($mt->user_id);
+<td> 
+<a style="color:green" href="/users/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
+</td>
+<td></td>
 
-@endphp 
+@else
 
-<div>
+<td></td>
 
-{{ $player_name->firstname }} {{ $player_name->lastname }}
+<td>
+<a style="color:red" href="/users/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
+</td>
 
-</div>
+@endif
+
+<td>
+
+@if ($match->present) 
+
+<a href="/voetballers/change_team/{{ $match->id }}"> {{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
+
+@endif
+
+</td>
+
+</tr>     
 
 @endforeach
 
+</table> 
+
+</div>
 
 </div>
 

@@ -14,14 +14,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-*/
-  
-Route::get('/voetballers', action: [MatchroundController::class, 'index'])->name('index');
-Route::get('/voetballers', action: [MatchroundController::class, 'show'])->name(name: 'show');
 
-Route::patch('/voetballers/{$id}/edit', action: [MatchroundController::class, 'edit'])->name(name: 'edit');
+  */
+//Route::get('/voetballers', action: [MatchroundController::class, 'index'])->name('index');
+//Route::get('/voetballers', action: [MatchroundController::class, 'show'])->name(name: 'show');
 
-Route::patch('/voetballers/change_team/{$id}', action: [MatchroundController::class, 'change_team'])->name(name: 'change_team');
+Route::get('/change_presence/{id}', action: [MatchroundController::class, 'change_presence']);
+Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_team']);
 
 
 /*

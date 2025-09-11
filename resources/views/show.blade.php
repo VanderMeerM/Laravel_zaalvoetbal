@@ -6,16 +6,15 @@
 <body>
 
 
-<div class="center">
-
 <x-center>
 
-<a href="{{ route('voetballers.index') }}">Terug naar overzicht </a>
+<a href="."> Terug naar overzicht speeldata</a>
 
 </x-center>
 
+ <div class="text-4xl font-bold ml-5"> {{ $current_date->date }} </div>
 
-<table>
+<table class="m-0 m-auto mt-3">
 
 
 <tr>
@@ -31,8 +30,10 @@
 @if ($match->present) 
 
 <td> 
-<a style="color:green" href="/voetballers/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
+
+<a style="color:green" href="/change_presence/{{ $match->id }}"> {{  $match->user->firstname }} </a>
 </td>
+
 <td></td>
 
 @else
@@ -40,7 +41,7 @@
 <td></td>
 
 <td>
-<a style="color:red" href="/voetballers/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
+<a style="color:red" href="/change_presence/{{ $match->id }}">{{  $match->user->firstname }} </a> 
 </td>
 
 @endif
@@ -49,7 +50,7 @@
 
 @if ($match->present) 
 
-<a href="/voetballers/change_team/{{ $match->id }}"> {{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
+<a href="/change_team/{{ $match->id }}"> {{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
 
 @endif
 
@@ -61,4 +62,11 @@
 
 </table> 
 
-</div>
+
+ <div class="text-4xl font-bold ml-5">  Uitslag </div>
+
+ <div class="h-10 w-10 mb-10 bg-orange-500"></div>
+
+  <div class="h-10 w-10 mb-10 bg-yellow-300"></div>
+
+

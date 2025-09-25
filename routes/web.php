@@ -78,6 +78,8 @@ return view('dates.create');
 
 Route::post('/dates/store', [DateController::class, 'store']);
 
+Route::post('/dates/edit', [DateController::class, 'edit']);
+
 
 Route::resource( 'dates', DateController::class);
 

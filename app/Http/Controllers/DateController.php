@@ -53,6 +53,23 @@ class DateController extends Controller
             */
     }
 
+    public function edit($id) 
+    {
+         request()->validate([
+        'goals_orange' => ['required'],
+        'goals_yellow' => ['required'],
+
+        ]);
+
+        $date = Date::findOrFail($id);
+
+        $date->result_orange = request('goals_orange');
+
+        $date->result_yellow = request('goals_yellow');   
+
+     return to_route('dates.index');
+    }
+
  public function store()
     {
          request()->validate([
@@ -90,7 +107,7 @@ $new_date = Date::create(
     {
         $date = Date::findOrFail($id);
 
-        $matchesdate=Matchround::where('date_id', '=', $date->id);
+        $matchesdate=Matchround::where('date_id', '=', $date);
         $matchesdate->delete();    
         
         $date->delete();

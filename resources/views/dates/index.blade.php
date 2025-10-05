@@ -41,7 +41,7 @@
 
 </div>
 
-<form id="delete_date" method="post" action='/dates/{{ $date->id }}' class="hidden">
+<form id="delete_date" method="post" action='/dates/delete/{{ $date->id }}' class="hidden">
 @csrf
 @method('DELETE')
 

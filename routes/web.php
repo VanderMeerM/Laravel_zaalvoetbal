@@ -69,19 +69,25 @@ Route::get('/dates', function() {
     $dates= Date::all(); 
 
     return view('dates.index', compact('dates'));
-});
+})->name('dates.index');
 
-
+/*
 Route::get('/dates/create', function() {
 return view('dates.create');
 });
+*/
+
+Route::get ('/dates/{date}', [DateController::class, 'show'])
+->name('dates.show');
 
 Route::post('/dates/store', [DateController::class, 'store']);
 
-Route::post('/dates/edit', [DateController::class, 'edit']);
+Route::patch('/dates/{date}', [DateController::class, 'update']);
+
+Route::delete('/dates/delete/{date}', [DateController::class, 'destroy']);
 
 
-Route::resource( 'dates', DateController::class);
+//Route::resource( 'dates', DateController::class);
 
 
 //Route::resource('/teams', TeamController::class);

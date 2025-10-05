@@ -65,15 +65,16 @@
 
  <div class="text-4xl font-bold ml-5 mt-3"> Uitslag </div>
 
-<form method="post" action="/dates/edit">
+<form method="post" action="/dates/{{ $current_date->id}}">
 @csrf 
+@method('PATCH')
 
  <div class="flex items-center">
 
  <div class="h-10 w-10 mb-10 bg-orange-500"></div>
  <input 
- class="block w-8 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
- type="number" id="goals_orange" name="goals_orange" />
+ class="block w-16 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+ type="number" id="goals_orange" name="goals_orange" value= {{ $current_date-> result_orange }} />
 
  </div>
 
@@ -81,8 +82,8 @@
 
  <div class="h-10 w-10 mb-10 bg-yellow-300"></div>
  <input 
-class="block w-8 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-type="number"  id="goals_yellow" name="goals_yellow" />
+class="block w-16 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date-> result_yellow }} />
 
 </div>
 

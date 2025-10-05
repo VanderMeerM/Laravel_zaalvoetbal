@@ -53,21 +53,53 @@ class DateController extends Controller
             */
     }
 
-    public function edit($id) 
+    public function update($id) 
     {
-         request()->validate([
+        request()->validate([
         'goals_orange' => ['required'],
         'goals_yellow' => ['required'],
 
         ]);
-
+        
         $date = Date::findOrFail($id);
 
         $date->result_orange = request('goals_orange');
+        $date->result_yellow = request('goals_yellow');
+        $date->save();
+     
+        $matchround_yellow = Matchround::select()->where(
+            'date_id','=', $date->id)->where(
+            'present', '=', 1)->where(
+            'team_id','=', 2)->get();
 
-        $date->result_yellow = request('goals_yellow');   
+            
+        $matchround_orange = Matchround::select()->where(
+            'date_id','=', $date->id)->where(
+            'present', '=', 1)->where(
+            'team_id','=', 1)->get();
 
-     return to_route('dates.index');
+
+        if (request('goals_yellow') < request('goals_orange')) {
+           $matchround_orange->result === 'W'; 
+           $matchround_yellow->result === 'L';
+        }
+
+        else if (request('goals_yellow') > request('goals_orange')) {
+           $matchround_orange->result === 'L'; 
+           $matchround_yellow->result === 'W';
+        
+        }
+
+        else {
+            $matchround_orange->result === 'D'; 
+            $matchround_yellow->result === 'D';
+        }
+
+        $matchround_yellow->save();
+        $matchround_orange->save();
+        
+
+     return to_route('dates.show', ['date' => $date->id]);
     }
 
  public function store()
@@ -107,7 +139,7 @@ $new_date = Date::create(
     {
         $date = Date::findOrFail($id);
 
-        $matchesdate=Matchround::where('date_id', '=', $date);
+        $matchesdate=Matchround::where('date_id', '=', $date)->get();
         $matchesdate->delete();    
         
         $date->delete();

@@ -37,15 +37,26 @@
 
 </x-block>
 
- <button form="delete_date" class="flex-initial text-red-500 mr-20">Verwijder </button>
+<form method="post" action=" {{ route('dates.delete', ['date' => $date->id]) }}">
+    @csrf
+@method('DELETE')
+
+<input type="submit" value="Verwijder"> 
+
+</form>
+
+
+<!-- <button form="delete_date" class="flex-initial text-red-500 mr-20">Verwijder </button> -->
 
 </div>
 
-<form id="delete_date" method="post" action='/dates/delete/{{ $date->id }}' class="hidden">
+<!--
+<form id="delete_date" method="post" action='/dates/{{ $date->id }}' class="hidden">
 @csrf
 @method('DELETE')
 
 </form>
+-->
 
 @endforeach
 

@@ -84,7 +84,8 @@ Route::post('/dates/store', [DateController::class, 'store']);
 
 Route::patch('/dates/{date}', [DateController::class, 'update']);
 
-Route::delete('/dates/delete/{date}', [DateController::class, 'destroy']);
+Route::delete('/dates/delete/{date}', [DateController::class, 'destroy'])
+->name('dates.delete');
 
 
 //Route::resource( 'dates', DateController::class);

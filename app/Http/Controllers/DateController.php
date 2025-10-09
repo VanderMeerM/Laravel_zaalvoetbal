@@ -33,7 +33,7 @@ class DateController extends Controller
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
-      $current_date = Date::find($id);
+      $current_date = Date::findOrFail($id);
       $teams = Team::all();
 
        return view('show',  [
@@ -138,9 +138,12 @@ $new_date = Date::create(
      public function destroy($id)
     {
         $date = Date::findOrFail($id);
-
-        $matchesdate=Matchround::where('date_id', '=', $date)->get();
-        $matchesdate->delete();    
+        
+        $matchesdate = Matchround::select()->where('date_id', '=', $date->id)->get();
+        
+       foreach ($matchesdate as $md) {
+       $md->delete();    
+        }
         
         $date->delete();
         

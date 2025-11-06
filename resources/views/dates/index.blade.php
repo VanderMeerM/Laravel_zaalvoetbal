@@ -25,7 +25,7 @@
 
 @foreach ($dates as $date)
 
-<div style="display: flex">
+<div style="display: flex; justify-content: center;">
 
 <x-block>
 
@@ -41,7 +41,7 @@
     @csrf
 @method('DELETE')
 
-<input type="submit" value="Verwijder"> 
+<input type="submit" class="flex-initial text-red-500 mr-20" value="Verwijder"> 
 
 </form>
 

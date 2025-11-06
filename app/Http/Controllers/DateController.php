@@ -67,37 +67,57 @@ class DateController extends Controller
         $date->result_yellow = request('goals_yellow');
         $date->save();
      
-        $matchround_yellow = Matchround::select()->where(
+        $matchround_yellow = Matchround::where(
             'date_id','=', $date->id)->where(
             'present', '=', 1)->where(
-            'team_id','=', 2)->get();
+            'team_id','=', 0)->get();
 
             
-        $matchround_orange = Matchround::select()->where(
+        $matchround_orange = Matchround::where(
             'date_id','=', $date->id)->where(
             'present', '=', 1)->where(
             'team_id','=', 1)->get();
 
 
-        if (request('goals_yellow') < request('goals_orange')) {
-           $matchround_orange->result === 'W'; 
-           $matchround_yellow->result === 'L';
-        }
+        if ($date->result_yellow < $date->result_orange) {
+//dd($matchround_yellow);
+           foreach ($matchround_orange as $mo)  
+            { $mo->update([
+                'result' => 'W']); } 
+               
 
-        else if (request('goals_yellow') > request('goals_orange')) {
-           $matchround_orange->result === 'L'; 
-           $matchround_yellow->result === 'W';
+             foreach ($matchround_yellow as $my)  
+             { $my->update([
+                'result' => 'L']); } 
+
+        }
+          
+        else if ($date->result_yellow > $date->result_orange) {
+          
+            foreach ($matchround_orange as $mo)  
+            { $mo->update([
+                'result' => 'L']); } 
+
+             foreach ($matchround_yellow as $my)  
+           { $my->update([
+                'result' => 'W']); } 
         
         }
 
-        else {
-            $matchround_orange->result === 'D'; 
-            $matchround_yellow->result === 'D';
+        else if ($date->result_yellow == $date->result_orange) {
+             foreach ($matchround_orange as $mo)  
+            { $mo->update([
+                'result' => 'D']); } 
+
+             foreach ($matchround_yellow as $my)  
+           { $my->update([
+                'result' => 'D']); } 
+        
         }
 
-        $matchround_yellow->save();
-        $matchround_orange->save();
-        
+       // $matchround_yellow->save();
+       // $matchround_orange->save();
+
 
      return to_route('dates.show', ['date' => $date->id]);
     }

@@ -15,13 +15,13 @@ Nieuwe speler toevoegen
 
 @foreach ($users as $user)
 
-<div style="display: flex">
+<div style="display: flex; justify-content: center;">
 
 <x-block>
 
 <a href= "{{ route('users.show', ['user' => $user->id])}}" >
 
-{{  $user->firstname }} {{ $user->lastname}}   
+{{  $user->firstname }} {{ $user->lastname }}   
 
 </a>
 

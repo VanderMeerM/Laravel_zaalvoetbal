@@ -8,8 +8,10 @@
      
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a href= "../users" class="rounded-md bg-green-900 px-3 py-2 text-sm font-medium text-white">Spelers</a>
+            <a href= "../users" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Spelers</a>
             <a href="../dates" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Speeldata</a>
+            <a href="../statistics" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Statistieken</a>
+
             <!--<a href="./voetballers" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Rondes</a>-->
           </div>
         </div>

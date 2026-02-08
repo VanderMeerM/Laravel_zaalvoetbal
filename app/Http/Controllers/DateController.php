@@ -16,7 +16,7 @@ class DateController extends Controller
      public function index()
     {
 
-        $dates= Date::orderBy('date')->get();
+        $dates= Date::orderByDesc('id')->get();
 
         return view('dates.index', compact('dates'));
     }
@@ -33,24 +33,19 @@ class DateController extends Controller
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
-      $current_date = Date::findOrFail($id);
+      $current_date_id = Date::findOrFail($id);
+      $date_create = date_create($current_date_id->date);
       $teams = Team::all();
 
        return view('show',  [
         'matchround' => $matchround_dates,
         'num_present' => $num_present,
         'num_absent' => $num_absent,
-        'current_date' => $current_date,
+        'current_date_id' => $current_date_id,
+        'date_create' => $date_create,
         'teams' => $teams
        ]);
-
-        //$player = Player::select()->where('id', '=', $id)->get();
-        //$match = Matchround::where('date_id', '=', $id)->get();
-       
-          /*    return view('/dates.show', [
-                'match' => $match,
-            ]);
-            */
+      
     }
 
     public function update($id) 

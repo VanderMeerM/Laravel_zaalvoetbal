@@ -15,7 +15,7 @@ class MatchroundController extends Controller
       public function index()
         {
 
-     $dates = Date::all();
+     $dates = Date::orderByDesc('id')->get();
 
       return view('index', [
        'dates' => $dates

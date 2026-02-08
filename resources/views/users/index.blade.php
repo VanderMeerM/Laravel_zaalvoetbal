@@ -27,7 +27,7 @@ Nieuwe speler toevoegen
 
 </x-block>
 
- <button form="delete_user" class="flex-initial text-red-500 mr-20">Verwijder </button>
+ <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button>
 
 </div>
 

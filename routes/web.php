@@ -5,6 +5,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\SessionController;
 use App\Models\User;
 use App\Models\Date;
 use App\Models\Matchround;
@@ -92,6 +93,9 @@ Route::delete('/dates/delete/{date}', [DateController::class, 'destroy'])
 
 Route::resource( '/statistics', StatisticController::class)
 ->only('index');
+
+Route::get('/login', [SessionController::class, 'create'])->name('auth.login');
+Route::post('/login', [SessionController::class, 'store'])->name('auth.login');
 
 //Route::resource( 'dates', DateController::class);
 

@@ -36,6 +36,7 @@ class DateController extends Controller
       $current_date_id = Date::findOrFail($id);
       $date_create = date_create($current_date_id->date);
       $teams = Team::all();
+      $users_with_ball = User::select()->where('hasBall', '=','on')->get();
 
        return view('show',  [
         'matchround' => $matchround_dates,
@@ -43,7 +44,8 @@ class DateController extends Controller
         'num_absent' => $num_absent,
         'current_date_id' => $current_date_id,
         'date_create' => $date_create,
-        'teams' => $teams
+        'teams' => $teams,
+        'users_with_ball' => $users_with_ball
        ]);
       
     }

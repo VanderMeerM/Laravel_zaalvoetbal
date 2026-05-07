@@ -29,6 +29,15 @@ Nieuwe speler toevoegen
 
  <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button>
 
+ <form action='/users/{{ $user->id }}' method="post">
+ @csrf
+ @method('POST')
+  <input name="hasBall" @if ($user->hasBall) checked @endif id="hasBall" type="checkbox">
+  <label for="hasBall"> heeft een bal</label> 
+
+ </form>
+
+
 </div>
 
 <form id="delete_user" method="post" action='/users/{{ $user->id }}' class="hidden">

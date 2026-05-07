@@ -12,8 +12,8 @@ table {
     width: fit-content;
 }
 
-td {
-    padding: 0 10px;
+th, td {
+    padding: 5px 10px;
 }
 
 .main_container_up,
@@ -32,6 +32,15 @@ width: 50%;
     display: flex;
     justify-content: center;
     padding: 2%;
+}
+
+.ball {
+    width: 20px;
+    height: auto;
+}
+
+#hasBall {
+    margin-top: 50%;
 }
 
 

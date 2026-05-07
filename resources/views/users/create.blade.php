@@ -48,6 +48,7 @@
             <input id="isAdmin" type="checkbox" name="isAdmin" />
           </div>
         </div>   
+
         </div>
         <div>     
           @if($errors->any())

@@ -45,6 +45,7 @@ $new_user = User::create(
         'email' => request('email'),
         'password' => Hash::make(request('password')),
         'isAdmin' => request('isAdmin'),
+        'hasBall' => false
                
     ]);
 

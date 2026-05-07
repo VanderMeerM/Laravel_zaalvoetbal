@@ -24,7 +24,6 @@
 
 <table>
 
-
 <tr>
 <th>Aanwezig ({{ $num_present }})</th>
 <th>Afwezig ({{ $num_absent }})</th>
@@ -39,6 +38,7 @@
 
 <td> 
 <a style="color:green" href="/users/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
+@if ($users_with_ball) <img src="./ball.png"> @endif 
 </td>
 <td></td>
 

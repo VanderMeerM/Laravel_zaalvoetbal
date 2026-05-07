@@ -47,7 +47,10 @@
       <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" value= {{ $user->password }} >
     </div>
   </div>
-  
+
+  @if ($user->hasBall) <div> {{ $user->firstname }} heeft een bal. </div>
+  @endif
+
 </form>
 
 </div>

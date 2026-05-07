@@ -22,6 +22,8 @@ class StatisticController extends Controller
     $array_present = [];
     $array_player_won = [];
     $array_player_orange = [];
+    $array_values_player =[];
+    $array_most_valuable_player = [];
 
     foreach ($users as $user) {
 
@@ -44,6 +46,15 @@ class StatisticController extends Controller
     $array_player_orange += 
      [$user['firstname'] => round(($num_player_orange/$num_present) * 100, 0)];
 
+     // Meest waardevolle speler..
+     $array_values_player = array_merge_recursive($array_present, $array_player_won);
+     // [$user['firstname'] => 5];
+
+    }
+
+    foreach ($array_values_player as $name=> $values) {
+    $array_most_valuable_player += 
+    [$name => round($values[0] * $values[1]) / 100, 1];
     }
 
     $num_team_orange_won = 0;
@@ -71,7 +82,8 @@ class StatisticController extends Controller
     
     arsort($array_present);
     arsort($array_player_won);
-    arsort($array_player_orange);
+    ksort($array_player_orange);
+    arsort($array_most_valuable_player);
 
   
       return view('statistic.index', [
@@ -82,7 +94,8 @@ class StatisticController extends Controller
        'array_player_orange' => $array_player_orange,
        'num_team_orange_won'=> $num_team_orange_won,
        'num_team_yellow_won' => $num_team_yellow_won, 
-       'num_draw' => $num_draw
+       'num_draw' => $num_draw, 
+       'array_most_valuable_player' => $array_most_valuable_player
         ]);
     }
 

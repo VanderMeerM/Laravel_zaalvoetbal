@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var list<string>
      */
    
-     protected $fillable = ['firstname', 'lastname', 'email', 'password', 'isAdmin'];
+     protected $fillable = ['firstname', 'lastname', 'email', 'password', 'isAdmin', 'hasBall'];
 
    public function matchround(): HasOne 
     {

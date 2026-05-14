@@ -36,7 +36,7 @@ class DateController extends Controller
       $current_date_id = Date::findOrFail($id);
       $date_create = date_create($current_date_id->date);
       $teams = Team::all();
-      $users_with_ball = User::select()->where('hasBall', '=','on')->get();
+      $users_with_ball = User::select('id')->where('hasBall', '=', 'on')->get();
 
        return view('show',  [
         'matchround' => $matchround_dates,

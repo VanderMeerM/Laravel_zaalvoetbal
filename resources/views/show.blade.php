@@ -1,18 +1,21 @@
 
+
 @extends('CSS.app')
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body>
-
+<x-header></x-header>
 
 <x-center>
 
-<a href="."> Terug naar overzicht speeldata</a>
+<body>
+
+<a></a>
 
 </x-center>
 
  <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} </div>
+
 
 <table class="m-0 m-auto mt-3">
 
@@ -24,14 +27,16 @@
 </tr>
 
 @foreach($matchround as $match)
-    
+
 <tr>
 
 @if ($match->present) 
 
 <td> 
 
-<a style="color:green" href="/change_presence/{{ $match->id }}"> {{  $match->user->firstname }} </a>
+<a style="color:green; display:flex;" href="/change_presence/{{ $match->id }}"> {{  $match->user->firstname }} 
+@if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a>
+
 </td>
 
 <td></td>
@@ -41,7 +46,9 @@
 <td></td>
 
 <td>
-<a style="color:red" href="/change_presence/{{ $match->id }}">{{  $match->user->firstname }} </a> 
+<a style="color:red; display:flex;" href="/change_presence/{{ $match->id }}">{{  $match->user->firstname }} 
+@if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a> 
+
 </td>
 
 @endif
@@ -60,12 +67,12 @@
 
 @endforeach
 
-</table> 
 
+</table> 
 
  <div class="text-4xl font-bold ml-5 mt-3"> Uitslag </div>
 
-<form method="post" action="/dates/{{ $current_date_id->id}}">
+ <form method="post" action="/dates/{{ $current_date_id->id}}">
 @csrf 
 @method('PATCH')
 

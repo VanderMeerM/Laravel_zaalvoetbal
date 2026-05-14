@@ -2,8 +2,6 @@
  
 
  <script src="https://cdn.tailwindcss.com"></script> 
- <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.js"></script>
 
 <x-header>    </x-header>
 
@@ -40,11 +38,9 @@
 
 <div class="center">
 
-<p></p>
-<!--present = 1 and team =0/1 and result = W/L/D 
+<!--present = 1 and team =0/1 and result = W/L/D -->
 
-<canvas id="chart_team"></canvas>-->
-
+<!--
 <table>
 <tr>
 <td>
@@ -69,8 +65,53 @@ Gelijk
 </td>
 </tr>
 </table>
+-->
+
 </div>
+
+<div class="center">
+<canvas id="chart_team"></canvas>
 </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+  
+<script>
+
+const chartTeam = document.getElementById('chart_team');
+
+const teamOrange = <?php echo json_encode($num_team_orange_won);?>;
+const teamYellow = <?php echo json_encode($num_team_yellow_won);?>;
+const numDraw = <?php echo json_encode($num_draw);?>;
+
+const pieChart = new Chart(chartTeam, { 
+    type: 'pie',
+    data: {
+      //labels: ['Oranje', 'Geel'],
+      datasets: [
+        {
+            backgroundColor: ['orange', 'yellow', 'white'],
+            data: [teamOrange, teamYellow, numDraw]
+        }
+      ]
+    },
+    options: {     
+      plugins: {
+        labels: {
+          render: 'percentage', 
+          fontColor: 'black',
+          fontStyle: 'bolder',
+           }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  </script>
 
 <div class="container_table">
 
@@ -129,7 +170,7 @@ Gelijk
 
 <div class="container_table">
   
-<h1> Meest waardevolle speler <br>(obv aanwezigheid + winstpotjes)</h1>
+<h1> Meest waardevolle speler </h1><h3>(obv aanwezigheid + winstpotjes)</h3> 
 
 <div class="center">
 <p></p>
@@ -149,22 +190,6 @@ Gelijk
 </table>
 
 </div>
-
-<script defer>
-  let chartTeam = document.getElementById('chart_team').getContext('2d');
-
-  let pieChart = new Chart(chartTeam, 
-  { 
-    type: 'pie',
-    data: {
-      labels: ['Oranje', 'Geel'],
-      datasets: [13, 18]
-    },
-    options: {}
-
-  });
-
-</script>
 
 </body>
 </html>

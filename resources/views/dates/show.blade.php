@@ -20,8 +20,6 @@
 
 </x-center>
 
-
-
 <table>
 
 <tr>
@@ -38,7 +36,6 @@
 
 <td> 
 <a style="color:green" href="/users/{{ $match->id }}/edit">{{  $match->user->firstname }} </a> 
-@if ($users_with_ball) <img src="./ball.png"> @endif 
 </td>
 <td></td>
 

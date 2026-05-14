@@ -1,11 +1,19 @@
 
 <style>
 
-h1 {
+body {
+    background-color: #F2EBEB;
+}
+
+h1, h3 {
     font-size: 20;
     font-weight: bold;
     width: fit-content;
     margin: 0 auto;
+}
+
+h3 {
+    font-size: 14;
 }
 
 table {
@@ -34,9 +42,15 @@ width: 50%;
     padding: 2%;
 }
 
-.ball {
+canvas #chart_team {
+    width: 200px;
+    height: auto;
+}
+
+#ball {
     width: 20px;
     height: auto;
+    margin-left: 3px;
 }
 
 #hasBall {

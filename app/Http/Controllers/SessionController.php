@@ -20,9 +20,7 @@ class SessionController extends Controller
             'password' => ['required']
         ]);
 
-       //$pass_id = $request->input('pass_id');
-
-        
+       
         if (!Auth::attempt($credentials, true)) {
 
             throw ValidationException::withMessages([
@@ -33,9 +31,7 @@ class SessionController extends Controller
 
          $request->session()->regenerate();
                    
-         return to_route('dates.index',
-         //['all'=> $pass_id]
-         );
+         return to_route('dates.index');
 
        }
 

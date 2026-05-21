@@ -12,7 +12,7 @@
 
 <div style="display: flex; justify-content: center;">
 
-<form class="w-full max-w-lg mt-20">
+<div class="w-full max-w-lg mt-20">
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -39,6 +39,9 @@
     </div>
   </div>
 
+  <form method="post" action= {{ route('users.update', ['user' => $user->id]) }} >
+  @csrf 
+
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
@@ -48,10 +51,16 @@
     </div>
   </div>
 
-  @if ($user->hasBall) <div> {{ $user->firstname }} heeft een bal. </div>
+  @if ($user->hasBall) 
+  <div> {{ $user->firstname }} heeft een bal. </div>
   @endif
 
-</form>
+ 
+     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Wijzig ww</button>
+
+  </form>
+
+</div>
 
 </div>
 

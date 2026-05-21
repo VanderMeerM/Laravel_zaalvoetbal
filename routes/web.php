@@ -64,9 +64,11 @@ return view('users.create');
 
 Route::post('/users', [UserController::class, 'store']);
 
+Route::post('/users/{id}', [UserController::class, 'update']);
+
 Route::delete( '/users/{id}',  [UserController::class, 'destroy']);
 
-Route::resource( 'users', UserController::class);
+Route::resource('users', UserController::class);
 
 
 Route::get('/dates', function() {

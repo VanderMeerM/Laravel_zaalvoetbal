@@ -16,9 +16,9 @@
 
  <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} </div>
 
+<x-center> 
 
 <table class="m-0 m-auto mt-3">
-
 
 <tr>
 <th>Aanwezig ({{ $num_present }})</th>
@@ -72,24 +72,25 @@
 
  <div class="text-4xl font-bold ml-5 mt-3"> Uitslag </div>
 
+ </x-center>
+
  <form method="post" action="/dates/{{ $current_date_id->id}}">
 @csrf 
 @method('PATCH')
 
- <div class="flex items-center">
+<div class="flex items-center">
+ <div>
 
- <div class="h-10 w-10 mb-10 bg-orange-500"></div>
  <input 
- class="block w-16 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+ class="block w-16 rounded-md bg-orange-500 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
  type="number" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }} />
 
  </div>
 
- <div class="flex items-center">
+ <div>
 
- <div class="h-10 w-10 mb-10 bg-yellow-300"></div>
  <input 
-class="block w-16 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+class="block w-16 rounded-md bg-yellow-300 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} />
 
 </div>

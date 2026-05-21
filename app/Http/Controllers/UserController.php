@@ -86,15 +86,20 @@ $new_user = User::create(
      */
     public function edit(string $id)
     {
-        //
+       //  
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(string $id)
     {
-        //
+      $user = User::find($id); 
+         
+        $user->fill(
+              ['password' => Hash::make(request('password'))])->save();
+
+                 return view('/users.show', ['user' => $user]);
     }
 
     /**

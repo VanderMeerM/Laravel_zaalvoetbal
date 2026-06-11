@@ -78,11 +78,11 @@
 @csrf 
 @method('PATCH')
 
-<div class="flex items-center">
+<div class="flex items-center justify-center mt-2 bg-black p-5 w-64 m-auto">
  <div>
 
  <input 
- class="block w-16 rounded-md bg-orange-500 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+ class="block w-16 m-4 rounded-md bg-orange-500 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
  type="number" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }} />
 
  </div>
@@ -90,7 +90,7 @@
  <div>
 
  <input 
-class="block w-16 rounded-md bg-yellow-300 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+class="block w-16 rounded-md bg-yellow-300 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} />
 
 </div>

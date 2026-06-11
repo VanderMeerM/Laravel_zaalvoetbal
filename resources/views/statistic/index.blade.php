@@ -115,7 +115,7 @@ const pieChart = new Chart(chartTeam, {
 
 <div class="container_table">
 
-<h1> Winst speler (obv aanwezigheid) </h1>
+<h1> Winst speler</h1> <h3>(obv aanwezigheid) </h3>
 
 <div class="center">
   
@@ -182,7 +182,7 @@ const pieChart = new Chart(chartTeam, {
 
 <tr>
 <td> {{ $name }} </td>
-<td> {{  $valuable }}% </td>
+<td> {{  $valuable }} </td>
 </tr>
 
 @endforeach

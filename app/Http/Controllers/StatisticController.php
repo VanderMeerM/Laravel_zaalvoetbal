@@ -83,8 +83,9 @@ class StatisticController extends Controller
     arsort($array_present);
     arsort($array_player_won);
     ksort($array_player_orange);
-    arsort($array_most_valuable_player);
 
+    arsort($array_most_valuable_player);
+    array_pop($array_most_valuable_player);
   
       return view('statistic.index', [
         'numgames'=> $numgames, 

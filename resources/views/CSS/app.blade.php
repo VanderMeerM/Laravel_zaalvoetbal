@@ -42,7 +42,7 @@ width: 50%;
     padding: 2%;
 }
 
-canvas #chart_team {
+ #chart_team {
     width: 200px;
     height: auto;
 }

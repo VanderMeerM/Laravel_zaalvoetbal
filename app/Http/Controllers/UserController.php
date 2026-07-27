@@ -8,6 +8,8 @@ use App\Models\Date;
 use App\Models\Matchround;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+
 class UserController extends Controller
 {
    public function index()
@@ -43,7 +45,8 @@ $new_user = User::create(
         'firstname' => request('firstname'),
         'lastname' => request('lastname'),
         'email' => request('email'),
-        'password' => Hash::make(request('password')),
+        'password' => request('password'), //Hash::make(request('password')),
+        'birthdate' => request('birthdate'),
         'isAdmin' => request('isAdmin'),
         'hasBall' => false
                
@@ -92,14 +95,27 @@ $new_user = User::create(
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id)
+    public function update($id, Request $request)
     {
-      $user = User::find($id); 
-         
-        $user->fill(
-              ['password' => Hash::make(request('password'))])->save();
+      $user = User::findOrFail($id);    
 
-                 return view('/users.show', ['user' => $user]);
+    /*  request()->validate([
+        'password' => ['required', Password::min(6), 'confirmed']
+      ]);
+    */
+      $new_pw = $request->password;
+      $new_firstname = $request->firstname;
+        
+           $user->fill(
+            ['firstname' => $new_firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+             'password' => Hash::make($new_pw), 
+             'birthdate' => $request->birthdate])
+            ->save(); // Hash::make('12345')])->save()
+
+              return view('/users.show', ['user' => $user]);
+        
     }
 
     /**

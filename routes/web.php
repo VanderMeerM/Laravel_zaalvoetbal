@@ -1,55 +1,27 @@
 <?php
 
 use App\Http\Controllers\MatchroundController;
-use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SessionController;
 use App\Models\User;
 use App\Models\Date;
-use App\Models\Matchround;
 use Illuminate\Support\Facades\Route;
 
-/*
 Route::get('/', function () {
-    return view('welcome');
+ return redirect()->route('dates.index');
 });
 
+Route::get('/login', [SessionController::class, 'create'])->name('auth.login');
+Route::post('/login', [SessionController::class, 'store'])->name('auth.login');
 
-  */
-//Route::get('/voetballers', action: [MatchroundController::class, 'index'])->name('index');
-//Route::get('/voetballers', action: [MatchroundController::class, 'show'])->name(name: 'show');
+Route::post('/logout', [SessionController::class, 'destroy'])->name('auth.logout');
+
 
 Route::get('/change_presence/{id}', action: [MatchroundController::class, 'change_presence']);
 Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_team']);
 
-
-/*
-Route::resource( '/dates', DateController::class); 
-
-
-
-Route::post('/dates/create', function() {
-
- $new_date = Date::create([
-        'date' => '2025-10-16' , // request('date'),
-    ]);
-
-   $users = User::all(); 
-
-    foreach($users as $user) 
-
-        Matchround::create([
-            'user_id' => $user->id,
-            'present' => 1,
-            'team_id' => 1,
-            'date_id' => $new_date->id
-            
-        ]);
-        
-})->name('create_date');
-*/
 
 Route::get('/users', function() {
     $users= User::all(); 
@@ -71,17 +43,13 @@ Route::delete( '/users/{id}',  [UserController::class, 'destroy']);
 Route::resource('users', UserController::class);
 
 
-Route::get('/dates', function() {
-    $dates= Date::all(); 
+Route::get('/dates',  [DateController::class, 'index'])
+ //   $dates= Date::orderByDesc('date')->get(); 
 
-    return view('dates.index', compact('dates'));
-})->name('dates.index');
+    
+  //  return view('dates.index', compact('dates'));
+->name('dates.index');
 
-/*
-Route::get('/dates/create', function() {
-return view('dates.create');
-});
-*/
 
 Route::get ('/dates/{date}', [DateController::class, 'show'])
 ->name('dates.show');
@@ -96,12 +64,3 @@ Route::delete('/dates/delete/{date}', [DateController::class, 'destroy'])
 Route::resource( '/statistics', StatisticController::class)
 ->only('index');
 
-Route::get('/login', [SessionController::class, 'create'])->name('auth.login');
-Route::post('/login', [SessionController::class, 'store'])->name('auth.login');
-
-//Route::resource( 'dates', DateController::class);
-
-
-//Route::resource('/teams', TeamController::class);
-
-//Route::resource('/voetballers', MatchroundController::class) ->only(['index', 'show', 'edit', 'change_team']);

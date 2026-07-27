@@ -15,8 +15,7 @@ class DateController extends Controller
 
      public function index()
     {
-
-        $dates= Date::all();
+        $dates= Date::orderByDesc('date')->get();
 
         return view('dates.index', compact('dates'));
     }

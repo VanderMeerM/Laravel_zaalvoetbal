@@ -12,6 +12,21 @@
             <a href="../dates" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Speeldata</a>
             <a href="../statistics" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Statistieken</a>
 
+             @guest
+             <form action=" {{ route('auth.login') }}" method="get">
+              @csrf
+
+            <button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" type="submit">Inloggen </button>
+              <!--<a href="../login" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Inloggen</a>-->
+            </form>
+            @endguest
+
+            @auth
+            <form method="post" action= "../logout">
+              @csrf
+            <button type="submit" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Uitloggen</button>
+            </form>
+            @endauth
             <!--<a href="./voetballers" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Rondes</a>-->
           </div>
         </div>

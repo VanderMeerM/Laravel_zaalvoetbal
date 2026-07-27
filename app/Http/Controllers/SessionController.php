@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 class SessionController extends Controller
 {
     public function create() {
-        return view('auth.login');
+     return view('auth.login');
 }
 
   public function store(Request $request) {
@@ -20,10 +20,10 @@ class SessionController extends Controller
             'password' => ['required']
         ]);
 
-       
-        if (!Auth::attempt($credentials, true)) {
+               
+        if (!Auth::attempt($credentials, false)) {
 
-            throw ValidationException::withMessages([
+           throw ValidationException::withMessages([
                 'error' => 'Onjuiste gegevens'
             ]);
 
@@ -33,12 +33,13 @@ class SessionController extends Controller
                    
          return to_route('dates.index');
 
+         
        }
 
   public function destroy() {
 
     Auth::logout();
 
-    return back();
+    return redirect('/login'); // back();
  }
 }

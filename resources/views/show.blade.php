@@ -6,13 +6,12 @@
 
 <x-header></x-header>
 
-<x-center>
 
 <body>
 
 <a></a>
 
-</x-center>
+
 
  <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} </div>
 

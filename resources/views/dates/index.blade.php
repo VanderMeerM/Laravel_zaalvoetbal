@@ -31,7 +31,9 @@
 
 <a href=" {{ route('dates.show', ['date' => $date->id])}}" >
 
-{{  $date->date }}
+@php 
+$single_date = date_create($date->date);
+echo date_format($single_date, "d-m-Y"); @endphp
 
 </a>
 

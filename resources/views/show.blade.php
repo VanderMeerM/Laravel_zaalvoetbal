@@ -17,7 +17,7 @@
 
 <x-center> 
 
-<table class="m-0 m-auto mt-3">
+<table style="margin: 2% auto">
 
 <tr>
 <th>Aanwezig ({{ $num_present }})</th>

@@ -10,6 +10,11 @@
      
  <div>
 
+ 
+@if ( ($logged_in_user == $user->id) || ($user->isAdmin === 'on') )
+ <p>Zelfde gebruiker als ingelogde gebruiker of admin </p>
+@endif
+
 <div style="display: flex; justify-content: center;">
 
   <form method="post" action= {{ route('users.update', 

@@ -8,13 +8,14 @@ use App\Models\Date;
 use App\Models\Matchround;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
    public function index()
     {
-
        $users = User::orderBy('firstname')->get();
 
         return view('users.index', compact('users'));
@@ -79,8 +80,9 @@ $new_user = User::create(
 
         //$player = Player::select()->where('id', '=', $id)->get();
         $user = User::findOrFail($id);
-       
-              return view('/users.show', ['user' => $user]);
+        $logged_in_user = Auth::user()->id;
+
+              return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user]);
     }
        
 
@@ -105,6 +107,7 @@ $new_user = User::create(
     */
       $new_pw = $request->password;
       $new_firstname = $request->firstname;
+      $logged_in_user = Auth::user()->id;
         
            $user->fill(
             ['firstname' => $new_firstname,
@@ -114,7 +117,7 @@ $new_user = User::create(
              'birthdate' => $request->birthdate])
             ->save(); // Hash::make('12345')])->save()
 
-              return view('/users.show', ['user' => $user]);
+              return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user ]);
         
     }
 

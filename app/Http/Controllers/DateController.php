@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 
 class DateController extends Controller
 {
-
      public function index()
     {
         $dates= Date::orderByDesc('date')->get();

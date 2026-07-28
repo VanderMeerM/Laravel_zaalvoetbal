@@ -10,7 +10,7 @@ use App\Models\Date;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
- return redirect()->route('dates.index');
+ return redirect()->route('auth.login');
 });
 
 Route::get('/login', [SessionController::class, 'create'])->name('auth.login');
@@ -24,6 +24,7 @@ Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_te
 
 
 Route::get('/users', function() {
+
     $users= User::all(); 
 
     return view('users.index', compact('users'));

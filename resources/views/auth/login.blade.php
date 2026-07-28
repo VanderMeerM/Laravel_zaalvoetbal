@@ -7,7 +7,7 @@
 
 <div style="display:flex; justify-content: center;">
   
-<img src="./team.png">
+<img class="team_picture_login" src="./team.png">
 </div>
 
 <form method="post" action= "">
@@ -43,18 +43,10 @@
             <x-error> </x-error>
      </div>
              
- <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 mt-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Log in</button>
+ <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm">Log in</button>
   </div>
 </form>
 
-<!--
-<form action="./dates" method="get">
-  <div class="mt-6 flex items-center justify-end gap-x-6">
-  <button type="submit" class="text-sm/6 font-semibold text-gray-900">Annuleren</button>
-  </form> 
--->
-
- 
 </body>
 
 </html>

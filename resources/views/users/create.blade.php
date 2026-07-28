@@ -56,6 +56,17 @@
           </div>
         </div>   
 
+        @php 
+if (date('m') >= 8) {
+$current_season = date('Y'); 
+} else {
+$current_season = (date('Y') - 1);
+}
+@endphp
+
+        <input value= {{ $current_season }} type="hidden" name="current_season">
+
+
         </div>
         <div>     
           @if($errors->any())

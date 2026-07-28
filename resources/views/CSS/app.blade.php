@@ -1,9 +1,6 @@
 
 <style>
 
-body {
-    background-color: #F2EBEB;
-}
 
 h1, h3 {
     font-size: 20;
@@ -42,6 +39,13 @@ width: 50%;
     padding: 2%;
 }
 
+#profile_img {
+    max-width: 200px;
+    height: auto;
+    margin: 3% auto 0;
+}
+
+
  #chart_team {
     width: 200px;
     height: auto;
@@ -55,6 +59,22 @@ width: 50%;
 
 #hasBall {
     margin-top: 50%;
+}
+
+.team_picture_login {
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    margin: 2% auto 0;
+}
+
+.logout {
+    position:absolute;
+    right: 0;
+    margin-right: 2%; 
+    width: 30px;
+    cursor: pointer;
+    height: auto;
 }
 
 

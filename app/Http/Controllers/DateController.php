@@ -7,6 +7,7 @@ use App\Models\Date;
 use App\Models\Matchround;
 use App\Models\User;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -14,6 +15,9 @@ class DateController extends Controller
 {
      public function index()
     {
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
         $dates= Date::orderByDesc('date')->get();
 
         return view('dates.index', compact('dates'));
@@ -21,12 +25,18 @@ class DateController extends Controller
 
  public function create()
     {     
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
     return to_route('create_date');
     }
 
 
   public function show($id)
     {
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
 
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
       $num_present = $matchround_dates->where('present', '=', '1')->count();
@@ -50,6 +60,10 @@ class DateController extends Controller
 
     public function update($id) 
     {
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
+
         request()->validate([
         'goals_orange' => ['required'],
         'goals_yellow' => ['required'],
@@ -110,23 +124,23 @@ class DateController extends Controller
         
         }
 
-       // $matchround_yellow->save();
-       // $matchround_orange->save();
-
-
      return to_route('dates.show', ['date' => $date->id]);
     }
 
  public function store()
     {
-         request()->validate([
-        'date' => ['required'],
+      if (Auth::guest()) {
+      return redirect('./login');
+    }
+      request()->validate([
+      'date' => ['required'],
        
     ]);
 
 $new_date = Date::create(   
      [
         'date' => request('date'),
+        'season' => request('current_season'),
         'created_at' => now()
                       
     ]);
@@ -141,6 +155,7 @@ $new_date = Date::create(
             'user_id' => $user->id,
             'team_id' => 1,
             'date_id' => $new_date->id, 
+            'season' => $new_date->season,
             'present' => 1,
             'created_at' => now()
         ]
@@ -152,6 +167,10 @@ $new_date = Date::create(
 
      public function destroy($id)
     {
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
+
         $date = Date::findOrFail($id);
         
         $matchesdate = Matchround::select()->where('date_id', '=', $date->id)->get();

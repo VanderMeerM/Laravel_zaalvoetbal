@@ -2,14 +2,16 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-
 <x-header>
 </x-header>
+
+@if (Auth::user()->isAdmin === 'on') 
 
 <x-addbtn>
 Nieuwe speler toevoegen
 </x-addbtn>
 
+@endif
 
 <body>
 
@@ -19,6 +21,10 @@ Nieuwe speler toevoegen
 
 <x-block>
 
+@if ($user->image != '')
+    <img style="width: 50px; height: auto" src="/spelers/{{ $user->image }}">
+@endif
+
 <a href= "{{ route('users.show', ['user' => $user->id])}}" >
 
 {{  $user->firstname }} {{ $user->lastname }}   
@@ -27,8 +33,12 @@ Nieuwe speler toevoegen
 
 </x-block>
 
+@if (Auth::user()->isAdmin === 'on') 
+
  <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button>
 
+ @endif
+ 
  <form action='/users/{{ $user->id }}' method="post">
  @csrf
  @method('POST')

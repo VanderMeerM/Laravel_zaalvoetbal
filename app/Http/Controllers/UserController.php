@@ -16,6 +16,11 @@ class UserController extends Controller
 {
    public function index()
     {
+
+    if (Auth::guest()) {
+        return redirect('./login');
+    }
+
        $users = User::orderBy('firstname')->get();
 
         return view('users.index', compact('users'));
@@ -25,7 +30,12 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {     
+    {   
+            
+    if (Auth::guest()) {
+        return redirect('./login');
+    }
+
     return view('users.create');
     }
     
@@ -35,6 +45,11 @@ class UserController extends Controller
      */
     public function store()
     {
+
+    
+    if (Auth::guest()) {
+        return redirect('./login');
+    }
          request()->validate([
         'firstname' => ['required'],
         'lastname' => ['required'],
@@ -53,7 +68,7 @@ $new_user = User::create(
                
     ]);
 
- $dates = Date::all(); 
+ $dates = Date::select()->where('season', '==', request('current_season'))->get(); 
 
  foreach ($dates as $date) {
 
@@ -78,6 +93,10 @@ $new_user = User::create(
     public function show($id)
     {
 
+    
+    if (Auth::guest()) {
+        return redirect('./login');
+    }
         //$player = Player::select()->where('id', '=', $id)->get();
         $user = User::findOrFail($id);
         $logged_in_user = Auth::user()->id;
@@ -99,23 +118,31 @@ $new_user = User::create(
      */
     public function update($id, Request $request)
     {
+
+        if (Auth::guest()) {
+        return redirect('./login');
+    }
+
       $user = User::findOrFail($id);    
 
     /*  request()->validate([
         'password' => ['required', Password::min(6), 'confirmed']
       ]);
     */
-      $new_pw = $request->password;
+
       $new_firstname = $request->firstname;
       $logged_in_user = Auth::user()->id;
+      $new_birthdate = $request->birthdate;
+
+      $user['birthdate'] = $new_birthdate;
         
            $user->fill(
             ['firstname' => $new_firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-             'password' => Hash::make($new_pw), 
-             'birthdate' => $request->birthdate])
-            ->save(); // Hash::make('12345')])->save()
+            //'password' => Hash::make($request->password), 
+            // 'birthdate' => $new_birthdate
+             ]) ->save(); // Hash::make('12345')])->save()
 
               return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user ]);
         
@@ -126,6 +153,11 @@ $new_user = User::create(
      */
     public function destroy($id)
     {
+    
+    if (Auth::guest()) {
+        return redirect('./login');
+    }
+
         $user = User::findOrFail($id);
 
         $matchesuser=Matchround::where('user_id', '=', $user->id);

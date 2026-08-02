@@ -37,10 +37,10 @@
 
 @if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
 href="/change_presence/{{ $match->id }}" 
-@endif >  {{  $match->user->firstname }} 
+@endif >  {{  $match->firstname }} 
 
 
-@if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a>
+@if  ($users_with_ball->contains($match->user_id)) <img id="ball" src= {{url('ball.png')}}> @endif </a>
 
 </td>
 
@@ -55,10 +55,10 @@ href="/change_presence/{{ $match->id }}"
 
 @if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
 href="/change_presence/{{ $match->id }}" 
-@endif >{{  $match->user->firstname }} 
+@endif >{{  $match->firstname }} 
 
 
-@if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a> 
+@if  ($users_with_ball->contains($match->user_id)) <img id="ball" src= {{url('ball.png')}}> @endif </a> 
 
 </td>
 

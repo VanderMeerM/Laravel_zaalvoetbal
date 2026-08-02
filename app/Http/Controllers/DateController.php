@@ -45,7 +45,13 @@ class DateController extends Controller
         return redirect('./login');
     }
 
-      $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
+      $matchround_dates =
+      
+      // Matchround::select()->where('date_id', '=', $id);
+
+        DB::table('matchrounds')->join('users', 'users.id', '=','matchrounds.user_id')->
+        select('matchrounds.*', 'users.firstname')->where('matchrounds.date_id', '=', $id)->orderBy('users.firstname')->get();
+
      // $username = User::find($matchround_dates->user_id)->firstname;
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();

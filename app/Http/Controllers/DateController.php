@@ -46,13 +46,10 @@ class DateController extends Controller
     }
 
       $matchround_dates =
-      
-      // Matchround::select()->where('date_id', '=', $id);
 
-        DB::table('matchrounds')->join('users', 'users.id', '=','matchrounds.user_id')->
-        select('matchrounds.*', 'users.firstname')->where('matchrounds.date_id', '=', $id)->orderBy('users.firstname')->get();
+      Matchround::join('users', 'users.id', '=','matchrounds.user_id')->
+      select('matchrounds.*', 'users.firstname')->where('matchrounds.date_id', '=', $id)->orderBy('users.firstname')->get();
 
-     // $username = User::find($matchround_dates->user_id)->firstname;
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
       $current_date_id = Date::findOrFail($id);
@@ -63,7 +60,6 @@ class DateController extends Controller
 
        return view('show',  [
         'matchround' => $matchround_dates,
-       // 'username' => $username,
         'num_present' => $num_present,
         'num_absent' => $num_absent,
         'current_date_id' => $current_date_id,

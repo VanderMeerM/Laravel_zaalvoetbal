@@ -34,7 +34,7 @@
 
 <div style="display: flex; justify-content: center;">
 
-<x-block>
+<x-dateblock>
 
 <a href=" {{ route('dates.show', ['date' => $date->id])}}" >
 
@@ -44,7 +44,7 @@ echo date_format($single_date, "d-m-Y"); @endphp
 
 </a>
 
-</x-block>
+</x-dateblock>
 
 @if (Auth::user()->isAdmin === 'on') 
 

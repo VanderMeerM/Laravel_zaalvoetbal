@@ -113,6 +113,27 @@ $new_user = User::create(
        //  
     }
 
+     public function setActivity($id)
+    {
+
+      $user = User::findOrFail($id); 
+
+      $user_activity = $user->isActive;
+
+      if ($user_activity === 'Y') {
+
+     $user->update([ 
+      'isActive' => 'N'
+      ]);
+     } else {
+        $user->update([
+            'isActive'=>'Y'
+        ]);
+    }
+       return view('users.index', ['users' => User::orderBy('firstname')->get()]);
+
+    }
+
     /**
      * Update the specified resource in storage.
      */

@@ -19,23 +19,27 @@ Nieuwe speler toevoegen
 
 <div style="display: flex; justify-content: center;">
 
-<x-block>
+<x-playerblock>
 
-@if ($user->image != '')
-    <img style="width: 50px; height: auto" src="/spelers/{{ $user->image }}">
-@endif
 
-<a href= "{{ route('users.show', ['user' => $user->id])}}" >
+    <img style="width: 50px; height: auto; align-items: center;" 
+    @if ($user->image != '') src="/spelers/{{ $user->image }}" @endif >
+
+
+<a class="player_img_name" href= "{{ route('users.show', ['user' => $user->id])}}" >
 
 {{  $user->firstname }} {{ $user->lastname }}   
 
 </a>
 
-</x-block>
+</x-playerblock>
 
 @if (Auth::user()->isAdmin === 'on') 
 
- <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button>
+<div class="container_activity">
+  <a class="user_activity" href="../setactivity/{{ $user->id }}"> {{ $user->isActive === 'Y' ?  "Deactiveren" : "Activeren" }}</a>
+</div>
+<!-- <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button> -->
 
  @endif
  

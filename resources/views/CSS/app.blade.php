@@ -51,6 +51,23 @@ width: 50%;
     height: auto;
 }
 
+.player_img_name {
+margin-left: 5%;
+align-content: center;
+}
+
+.container_activity {
+   display: flex;
+   justify-content: center;
+   margin: 1%;
+}
+
+.user_activity {
+    background-color: lightgray;
+    padding: 1.25rem; 
+    width: 120px;
+}
+
 #ball {
     width: 20px;
     height: auto;

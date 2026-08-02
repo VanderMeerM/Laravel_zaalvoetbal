@@ -22,6 +22,9 @@ Route::post('/logout', [SessionController::class, 'destroy'])->name('auth.logout
 Route::get('/change_presence/{id}', action: [MatchroundController::class, 'change_presence']);
 Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_team']);
 
+Route::get('/setactivity/{id}', action: [UserController::class, 'setActivity']);
+
+
 
 Route::get('/users', function() {
 

@@ -33,7 +33,13 @@
 
 <td> 
 
-<a style="color:green; display:flex;" href="/change_presence/{{ $match->id }}"> {{  $match->user->firstname }} 
+<a style="color:green; display:flex;" 
+
+@if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
+href="/change_presence/{{ $match->id }}" 
+@endif >  {{  $match->user->firstname }} 
+
+
 @if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a>
 
 </td>
@@ -45,7 +51,13 @@
 <td></td>
 
 <td>
-<a style="color:red; display:flex;" href="/change_presence/{{ $match->id }}">{{  $match->user->firstname }} 
+<a style="color:red; display:flex;" 
+
+@if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
+href="/change_presence/{{ $match->id }}" 
+@endif >{{  $match->user->firstname }} 
+
+
 @if  ($users_with_ball->contains($match->user->id)) <img id="ball" src= {{url('ball.png')}}> @endif </a> 
 
 </td>
@@ -56,7 +68,12 @@
 
 @if ($match->present) 
 
-<a href="/change_team/{{ $match->id }}"> {{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
+<a 
+ 
+@if (Auth::user()->isAdmin === 'on') href="/change_team/{{ $match->id }}" 
+@endif
+> 
+{{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
 
 @endif
 
@@ -82,7 +99,9 @@
 
  <input 
  class="block w-16 m-4 rounded-md bg-orange-500 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
- type="number" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }} />
+ type="number" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }}
+ @if (Auth::user()->isAdmin !== 'on') disabled @endif 
+  />
 
  </div>
 
@@ -90,14 +109,20 @@
 
  <input 
 class="block w-16 rounded-md bg-yellow-300 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} />
+type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} 
+ @if (Auth::user()->isAdmin !== 'on') disabled @endif 
+/>
 
 </div>
 
 </div>
+
+ @if (Auth::user()->isAdmin === 'on') 
 
 <x-addbtn>
 <button type="submit">Opslaan</button>
 </x-addbtn>
+
+@endif
 
 </form>

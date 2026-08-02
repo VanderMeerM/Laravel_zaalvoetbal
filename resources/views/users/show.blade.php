@@ -43,7 +43,7 @@
       type="text"
        @if ( ($logged_in_user != $user->id) && (Auth::user()->isAdmin !== 'on') ) disabled @endif
 
-      value= {{ $user->firstname }} > 
+      value= "{{ $user->firstname }}" > 
       
     </div>
     <div class="w-full md:w-1/2 px-3">
@@ -55,7 +55,7 @@
       id="grid-last-name" 
       type="text" 
        @if ( ($logged_in_user != $user->id) && (Auth::user()->isAdmin !== 'on') ) disabled @endif
-      value= {{ $user->lastname }}> 
+      value= "{{ $user->lastname }}"> 
       
     </div>
   </div>
@@ -88,9 +88,23 @@
     </div>
   </div>
 
+ @if (Auth::user()->isAdmin === 'on')
+
+  <div class="sm:col-span-4">
+        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Admin</label>
+          <div class="mt-2">
+            <input id="isAdmin" type="checkbox" name="isAdmin" 
+            @if ($user->isAdmin === 'on') checked @endif />
+          </div>
+        </div> 
+
+  @endif
+
+  
  @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
   <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-10">Opslaan</button>
  @endif
+
 
   </form>
 

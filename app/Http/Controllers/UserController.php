@@ -140,6 +140,8 @@ $new_user = User::create(
             ['firstname' => $new_firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
+            'isAdmin' => $request->isAdmin
+
             //'password' => Hash::make($request->password), 
             // 'birthdate' => $new_birthdate
              ]) ->save(); // Hash::make('12345')])->save()

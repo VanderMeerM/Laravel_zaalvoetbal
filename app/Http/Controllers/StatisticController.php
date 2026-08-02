@@ -16,8 +16,11 @@ class StatisticController extends Controller
      public function index()
     {
 
-    $numgames = DB::table('dates')->count(); 
-    $dates = Date::all();
+    $current_season = Date::current_season();
+    //$current_season = 2025;
+
+    $numgames = DB::table('dates')->where('season','=',$current_season)->count(); 
+    $dates = Date::where('season','=',$current_season)->get();
     $users = User::all();
     $array_present = [];
     $array_player_won = [];
@@ -27,18 +30,23 @@ class StatisticController extends Controller
 
     foreach ($users as $user) {
 
-    $num_present = Matchround::select()->where('user_id','=',$user['id'])->where('present','=',1)->count();
+    $num_present = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->count();
 
-    $num_player_won = Matchround::select()->where('user_id','=',$user['id'])->where('present','=',1)->where('result','=','W')->count();
+    $num_player_won = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->where('result','=','W')->count();
 
-    $num_player_orange = Matchround::select()->where('user_id','=',$user['id'])->where('present','=',1)->where('team_id','=', 1)->count();
+    $num_player_orange = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->where('team_id','=', 1)->count();
 
 
     //   Aanwezigheid spelers.. 
+    
+    if ($num_present > 0) {
     $array_present += 
     [$user['firstname'] => round(($num_present/$numgames) * 100, 0)];
+    }
     
     // Winstpartijen per speler..
+
+    if ( ($num_player_won != 0) || ($num_present !=0) ) {
     $array_player_won += 
     [$user['firstname'] => round(($num_player_won/$num_present) * 100, 0)];
 
@@ -49,7 +57,7 @@ class StatisticController extends Controller
      // Meest waardevolle speler..
      $array_values_player = array_merge_recursive($array_present, $array_player_won);
      // [$user['firstname'] => 5];
-
+    }
     }
 
     foreach ($array_values_player as $name=> $values) {

@@ -8,19 +8,26 @@ use App\Models\Matchround;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
 class DateController extends Controller
+
 {
+    
      public function index()
     {
          if (Auth::guest()) {
         return redirect('./login');
     }
         $dates= Date::orderByDesc('date')->get();
+        $current_season = Date::current_season();
 
-        return view('dates.index', compact('dates'));
+        return view('dates.index', 
+        ['dates' => $dates, 
+        'current_season' => $current_season
+        ]);
     }
 
  public function create()
@@ -39,21 +46,26 @@ class DateController extends Controller
     }
 
       $matchround_dates = Matchround::select()->where('date_id', '=', $id)->get();
+     // $username = User::find($matchround_dates->user_id)->firstname;
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
       $current_date_id = Date::findOrFail($id);
+      $logged_in_user = Auth::user()->id;
       $date_create = date_create($current_date_id->date);
       $teams = Team::all();
       $users_with_ball = User::select('id')->where('hasBall', '=', 'on')->get();
 
        return view('show',  [
         'matchround' => $matchround_dates,
+       // 'username' => $username,
         'num_present' => $num_present,
         'num_absent' => $num_absent,
         'current_date_id' => $current_date_id,
         'date_create' => $date_create,
         'teams' => $teams,
-        'users_with_ball' => $users_with_ball
+        'users_with_ball' => $users_with_ball,
+        'logged_in_user' => $logged_in_user
+
        ]);
       
     }
@@ -133,8 +145,7 @@ class DateController extends Controller
       return redirect('./login');
     }
       request()->validate([
-      'date' => ['required'],
-       
+      'date' => ['required']          
     ]);
 
 $new_date = Date::create(   

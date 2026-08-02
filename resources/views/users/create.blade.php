@@ -57,14 +57,15 @@
         </div>   
 
         @php 
+/*
 if (date('m') >= 8) {
 $current_season = date('Y'); 
 } else {
 $current_season = (date('Y') - 1);
 }
+*/
 @endphp
 
-        <input value= {{ $current_season }} type="hidden" name="current_season">
 
 
         </div>
@@ -80,7 +81,7 @@ $current_season = (date('Y') - 1);
              
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button type="button" class="text-sm/6 font-semibold text-gray-900">Annuleren</button>
+    <a href="../users" class="text-sm/6 font-semibold text-gray-900">Annuleren</a>
     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opslaan</button>
   </div>
 </form>

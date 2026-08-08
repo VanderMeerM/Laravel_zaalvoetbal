@@ -113,6 +113,28 @@ $new_user = User::create(
        //  
     }
 
+      public function hasball($id)
+    {
+
+     $user = User::findOrFail($id);
+ 
+      $user_hasball = $user->hasBall;
+
+      if ($user_hasball === 'on') {
+
+     $user->update([ 
+      'hasBall' => null
+      ]);
+     } else {
+        $user->update([
+            'hasBall'=>'on'
+        ]);
+
+    }
+        return view('users.index', ['users' => User::orderBy('firstname')->get()]);
+        
+    }
+
      public function setActivity($id)
     {
 
@@ -122,15 +144,17 @@ $new_user = User::create(
 
       if ($user_activity === 'Y') {
 
-     $user->update([ 
-      'isActive' => 'N'
+     $user->update([
+        'isActive' => 'N',
+         'isAdmin' => null, 
+         'hasBall' => null
       ]);
      } else {
         $user->update([
             'isActive'=>'Y'
         ]);
     }
-       return view('users.index', ['users' => User::orderBy('firstname')->get()]);
+       return redirect()->route('users.index', ['users' => User::orderBy('firstname')->get()]);
 
     }
 

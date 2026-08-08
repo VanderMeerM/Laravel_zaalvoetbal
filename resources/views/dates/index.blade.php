@@ -30,9 +30,31 @@
 
 </form>
 
+<form action= {{ route('dates.change_season') }} method="post"> 
+@csrf 
+
+<div class="season_selection">
+
+<select name="selected_season" onchange="this.form.submit()">
+
+<option disabled>Selecteer seizoen</option>
+
+@foreach ($all_seasons as $as)
+
+<option value="{{ $as->season }}"
+@if ($as->season == $selected_season) selected @endif >
+{{ $as->season }}</option> 
+
+@endforeach
+
+</select>
+</form>
+
+</div>
+
 @foreach ($dates as $date)
 
-<div style="display: flex; justify-content: center;">
+<div class="center" style="padding: 0%">
 
 <x-dateblock>
 

@@ -8,7 +8,12 @@
 <html>
 <body>
 
+
 <div class="main_container_up">
+
+Aantal wedstrijden met minimaal 10 eigen spelers:  
+{{ round(($matches_with_min_10_players/$numgames) * 100, 0) }}% (
+{{ $matches_with_min_10_players }} / {{ $numgames }});
 
 <div class="container_table">
 

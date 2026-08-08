@@ -8,7 +8,7 @@
 @if (Auth::user()->isAdmin === 'on') 
 
 <x-addbtn>
-Nieuwe speler toevoegen
+Speler toevoegen
 </x-addbtn>
 
 @endif
@@ -18,6 +18,16 @@ Nieuwe speler toevoegen
 @foreach ($users as $user)
 
 <div style="display: flex; justify-content: center;">
+
+@if (Auth::user()->isAdmin === 'on') 
+
+<div class="container_activity">
+  <a class="user_activity" href="../setactivity/{{ $user->id }}"> 
+  {{ $user->isActive === 'Y' ?  "❌" : "✅" }}</a>
+</div>
+<!-- <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button> -->
+
+ @endif
 
 <x-playerblock>
 
@@ -34,22 +44,19 @@ Nieuwe speler toevoegen
 
 </x-playerblock>
 
-@if (Auth::user()->isAdmin === 'on') 
+ <div style="display: flex; align-content: center; flex-wrap: wrap;">
 
-<div class="container_activity">
-  <a class="user_activity" href="../setactivity/{{ $user->id }}"> {{ $user->isActive === 'Y' ?  "Deactiveren" : "Activeren" }}</a>
-</div>
-<!-- <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button> -->
-
- @endif
- 
- <form action='/users/{{ $user->id }}' method="post">
+ <form action='../hasball/{{ $user->id }}' method="post">
  @csrf
  @method('POST')
-  <input name="hasBall" @if ($user->hasBall) checked @endif id="hasBall" type="checkbox">
-  <label for="hasBall"> heeft een bal</label> 
 
+ <div style="display:flex;">
+  <input name="hasBall" @if ($user->hasBall) checked @endif type="checkbox" onclick="this.form.submit()">
+   <img id="ball" src= {{url('ball.png')}} > 
+</div>
  </form>
+
+</div>
 
 
 </div>

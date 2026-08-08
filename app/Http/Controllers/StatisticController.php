@@ -17,10 +17,15 @@ class StatisticController extends Controller
     {
 
     $current_season = Date::current_season();
-    //$current_season = 2025;
+    
+    if (request()->input('selected_season') != '') {
+            $selected_season = request()->input('selected_season');
+        } else {
+            $selected_season = 2025; // $current_season;
+        }
 
-    $numgames = DB::table('dates')->where('season','=',$current_season)->count(); 
-    $dates = Date::where('season','=',$current_season)->get();
+    $numgames = Date::where('season','=',$selected_season)->count(); 
+    $dates = Date::where('season','=',$selected_season)->get();
     $users = User::all();
     $array_present = [];
     $array_player_won = [];
@@ -28,13 +33,16 @@ class StatisticController extends Controller
     $array_values_player =[];
     $array_most_valuable_player = [];
 
+   $matches_with_min_10_players = Matchround::select(DB::raw('count(`present`) as Aanwezigen'))->
+   where('present', '=', 1)->where('season', '=',$selected_season)->groupby('date_id')-> having('Aanwezigen', '>=', 10)->count(); 
+
     foreach ($users as $user) {
 
-    $num_present = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->count();
+    $num_present = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->count();
 
-    $num_player_won = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->where('result','=','W')->count();
+    $num_player_won = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->where('result','=','W')->count();
 
-    $num_player_orange = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$current_season)->where('present','=',1)->where('team_id','=', 1)->count();
+    $num_player_orange = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->where('team_id','=', 1)->count();
 
 
     //   Aanwezigheid spelers.. 
@@ -84,10 +92,6 @@ class StatisticController extends Controller
     {
     $num_draw ++;
     }
-
-    //$num_team_orange_won = Date::select()->where('result_orange', '>', 'result_yellow')->count();
-    //$num_team_yellow_won = Date::select()->where('result_yellow', '>', 'result_orange')->count();
-    
     arsort($array_present);
     arsort($array_player_won);
     ksort($array_player_orange);
@@ -98,6 +102,7 @@ class StatisticController extends Controller
       return view('statistic.index', [
         'numgames'=> $numgames, 
         'users'=> $users,
+        'matches_with_min_10_players' => $matches_with_min_10_players,
        'array_present' => $array_present, 
        'array_player_won' => $array_player_won,
        'array_player_orange' => $array_player_orange,
@@ -107,5 +112,4 @@ class StatisticController extends Controller
        'array_most_valuable_player' => $array_most_valuable_player
         ]);
     }
-
 }

@@ -25,7 +25,6 @@ Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_te
 Route::get('/setactivity/{id}', action: [UserController::class, 'setActivity']);
 
 
-
 Route::get('/users', function() {
 
     $users= User::all(); 
@@ -39,6 +38,8 @@ return view('users.create');
 });
 
 Route::post('/users', [UserController::class, 'store']);
+
+Route::post('/hasball{id}', [UserController::class, 'hasball']);
 
 Route::post('/users/{id}', [UserController::class, 'update']);
 
@@ -54,6 +55,8 @@ Route::get('/dates',  [DateController::class, 'index'])
   //  return view('dates.index', compact('dates'));
 ->name('dates.index');
 
+Route::post('/dates', [DateController::class, 'change_season']) -> name('dates.change_season');
+
 
 Route::get ('/dates/{date}', [DateController::class, 'show'])
 ->name('dates.show');
@@ -65,6 +68,7 @@ Route::patch('/dates/{date}', [DateController::class, 'update']);
 Route::delete('/dates/delete/{date}', [DateController::class, 'destroy'])
 ->name('dates.delete');
 
-Route::resource( '/statistics', StatisticController::class)
-->only('index');
+//Route::get('/statistics', StatisticController::class, 'index');
+//Route::post('/statistics', StatisticController::class, 'change_season')->name('statistics.change_season'); 
+Route::resource('/statistics', StatisticController::class)->only('index');
 

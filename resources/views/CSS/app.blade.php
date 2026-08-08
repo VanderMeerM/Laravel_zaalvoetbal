@@ -33,10 +33,16 @@ flex-direction: column;
 width: 50%;
 }
 
-.center {
+.center, 
+.season_selection {
     display: flex;
     justify-content: center;
     padding: 2%;
+}
+
+.season_selection {
+    width: fit-content;
+    margin: 0 auto;
 }
 
 #profile_img {
@@ -63,19 +69,13 @@ align-content: center;
 }
 
 .user_activity {
-    background-color: lightgray;
-    padding: 1.25rem; 
-    width: 120px;
+   align-content: center;
 }
 
 #ball {
     width: 20px;
     height: auto;
     margin-left: 3px;
-}
-
-#hasBall {
-    margin-top: 50%;
 }
 
 .team_picture_login {

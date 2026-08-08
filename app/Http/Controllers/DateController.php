@@ -15,18 +15,29 @@ use Illuminate\Http\Request;
 class DateController extends Controller
 
 {
-    
-     public function index()
+        public function index()
     {
          if (Auth::guest()) {
         return redirect('./login');
     }
-        $dates= Date::orderByDesc('date')->get();
-        $current_season = Date::current_season();
+         $current_season = Date::current_season();
+
+        if (request()->input('selected_season') != '') {
+            $selected_season = request()->input('selected_season');
+        } else {
+            $selected_season = $current_season;
+        }
+
+        $dates= Date::select()->where('season', '=', $selected_season)->orderByDesc('date')->get();
+
+        $all_seasons= Date::select('season')->distinct()->get();
 
         return view('dates.index', 
         ['dates' => $dates, 
-        'current_season' => $current_season
+        'current_season' => $current_season,
+        'all_seasons' => $all_seasons,
+        'selected_season' => $current_season
+       
         ]);
     }
 
@@ -70,6 +81,26 @@ class DateController extends Controller
 
        ]);
       
+    }
+
+    public function change_season() {
+
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
+        $selected_season = request()->input('selected_season');
+        $dates= Date::select()->where('season', '=', $selected_season)->orderByDesc('date')->get();
+        $current_season = Date::current_season();
+        $all_seasons= Date::select('season')->distinct()->get();
+
+        return view('dates.index', 
+        ['dates' => $dates, 
+        'current_season' => $current_season,
+        'all_seasons' => $all_seasons,
+        'selected_season' => $selected_season
+       
+        ]);
+    
     }
 
     public function update($id) 

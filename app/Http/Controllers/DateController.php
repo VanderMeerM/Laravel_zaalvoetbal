@@ -56,6 +56,8 @@ class DateController extends Controller
         return redirect('./login');
     }
 
+      $current_season = Date::current_season();
+
       $matchround_dates =
 
       Matchround::join('users', 'users.id', '=','matchrounds.user_id')->
@@ -64,6 +66,8 @@ class DateController extends Controller
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
       $current_date_id = Date::findOrFail($id);
+      $current_date = $current_date_id->date;
+      $match_nr = $current_date_id->match_nr;
       $logged_in_user = Auth::user()->id;
       $date_create = date_create($current_date_id->date);
       $teams = Team::all();
@@ -74,6 +78,9 @@ class DateController extends Controller
         'num_present' => $num_present,
         'num_absent' => $num_absent,
         'current_date_id' => $current_date_id,
+        'current_date'=> $current_date,
+        'current_season' => $current_season,
+        'match_nr' => $match_nr,
         'date_create' => $date_create,
         'teams' => $teams,
         'users_with_ball' => $users_with_ball,
@@ -82,6 +89,53 @@ class DateController extends Controller
        ]);
       
     }
+
+ public function copy($id)
+    {
+         if (Auth::guest()) {
+        return redirect('./login');
+    }
+
+    $old_date = Date::find($id);
+
+    //dd($old_date);
+
+    
+     $new_date = Date::create(   
+     [
+        'date' => request('current_date'),
+        'season' => request('current_season'),
+        'match_nr' => $old_date->match_nr + 1,
+        'created_at' => now()
+                      
+    ]);
+
+ $users = User::where('isactive','=','Y')->get(); 
+
+ foreach ($users as $user) {
+
+ $old_mr_values = Matchround::where('date_id', '=', $old_date->id)->where('user_id', '=', $user->id) ->first();
+
+ //dd($old_mr_values);
+  
+ Matchround::create(
+        [
+            'date' => now(),
+            'user_id' => $user->id,
+            'date_id' => $new_date->id, 
+            'season' => $new_date->season,
+            'team_id' => $old_mr_values->team_id,
+            'present' => $old_mr_values->present,
+            'created_at' => now()
+        ]
+        );
+     
+    }
+    return to_route('dates.show', ['date' => $new_date->id]);
+          
+    }
+
+
 
     public function change_season() {
 
@@ -134,7 +188,6 @@ class DateController extends Controller
 
 
         if ($date->result_yellow < $date->result_orange) {
-//dd($matchround_yellow);
            foreach ($matchround_orange as $mo)  
             { $mo->update([
                 'result' => 'W']); } 
@@ -185,11 +238,12 @@ $new_date = Date::create(
      [
         'date' => request('date'),
         'season' => request('current_season'),
+        'match_nr' => 1,
         'created_at' => now()
                       
     ]);
 
- $users = User::all(); 
+ $users = User::where('isactive','=','Y')->get(); 
 
  foreach ($users as $user) {
 

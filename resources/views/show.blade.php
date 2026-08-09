@@ -11,9 +11,27 @@
 
 <a></a>
 
+<div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} 
+
+@if ($match_nr > 1) 
+- potje {{ $match_nr }} 
+@endif
+</div>
+
+ @if (Auth::user()->isAdmin === 'on')
+
+<form action= {{ route('dates.copy', ['id' => $current_date_id]) }} method="post"> 
+@csrf 
+
+<input type="hidden" value= {{ $current_season }} name="current_season">
+<input type="hidden" value= {{ $current_date }} name="current_date">
 
 
- <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} </div>
+<button id="copy_button" type="submit">Kopieer dit potje</button>
+
+</form>
+
+ @endif 
 
 <x-center> 
 
@@ -73,9 +91,11 @@ href="/change_presence/{{ $match->id }}"
 @if (Auth::user()->isAdmin === 'on') href="/change_team/{{ $match->id }}" 
 @endif
 > 
-{{ $match->team_id == 1 ? 'oranje' : 'geel' }} </a> 
+<span class= {{ $match->team_id == 1 ? "orange_team_dot" : 'yellow_team_dot' }} ></span></a> 
 
 @endif
+
+
 
 </td>
 

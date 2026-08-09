@@ -8,33 +8,44 @@
 <html>
 <body>
 
+<form action= '' method="post"> 
+@csrf 
 
-<div class="main_container_up">
+<div class="season_selection">
 
-Aantal wedstrijden met minimaal 10 eigen spelers:  
-{{ round(($matches_with_min_10_players/$numgames) * 100, 0) }}% (
-{{ $matches_with_min_10_players }} / {{ $numgames }});
+Seizoen 
+<select name="selected_season" onchange="this.form.submit()">
 
-<div class="container_table">
+<option disabled>Selecteer seizoen</option>
 
-<h1> Aanwezigheid</h1>
+@foreach ($all_seasons as $as)
 
-<div class="center">
-
-<table>
-
-@foreach ($array_present as $name => $present) 
-
-<tr>
-<td> {{ $name }} </td>
-<td> {{  $present }}% </td>
-</tr>
+<option value="{{ $as->season }}"
+@if ($as->season == $selected_season) selected @endif >
+{{ $as->season }} - {{ $as->season+1 }}</option> 
 
 @endforeach
 
-</table>
- </div>
- </div>
+</select>
+</form>
+
+</div>
+
+<div class="main_container_up">
+
+ <div class="container_table">
+
+ <div style="text-align: center; margin-top: 3%">
+
+Wedstrijdpercentage met minimaal 10 eigen spelers: 
+
+<div style="font-size: 30px;">
+{{ round(($matches_with_min_10_players/$numgames) * 100, 0) }}% 
+({{ $matches_with_min_10_players }}/{{ $numgames }})
+
+</div>
+</div>
+</div>
 
  <div class="container_table">
 
@@ -42,35 +53,6 @@ Aantal wedstrijden met minimaal 10 eigen spelers:
 <h1> Winst oranje/geel </h1>
 
 <div class="center">
-
-<!--present = 1 and team =0/1 and result = W/L/D -->
-
-<!--
-<table>
-<tr>
-<td>
-Oranje 
-</td>
-<td>{{ $num_team_orange_won }} ({{ round(($num_team_orange_won/$numgames) * 100, 0) }}%)
-</td>
-</tr>
-
-<tr>
-<td>
-Geel
-</td>
-<td>{{ $num_team_yellow_won }} ({{ round(($num_team_yellow_won/$numgames) * 100, 0) }}%)
-</td>
-</tr>
-<tr>
-<td>
-Gelijk
-</td>
-<td>{{ $num_draw }} ( {{round(($num_draw/$numgames) * 100, 0) }}%)
-</td>
-</tr>
-</table>
--->
 
 </div>
 
@@ -118,7 +100,34 @@ const pieChart = new Chart(chartTeam, {
 
   </script>
 
-<div class="container_table">
+
+
+ </div>
+
+ <div class="main_container_down">
+
+ <div class="container_table">
+
+<h1> Aanwezigheid</h1>
+
+<div class="center">
+
+<table>
+
+@foreach ($array_present as $name => $present) 
+
+<tr>
+<td> {{ $name }} </td>
+<td> {{  $present }}% </td>
+</tr>
+
+@endforeach
+
+</table>
+ </div>
+ </div>
+
+ <div class="container_table">
 
 <h1> Winst speler</h1> <h3>(obv aanwezigheid) </h3>
 
@@ -138,10 +147,6 @@ const pieChart = new Chart(chartTeam, {
 </table>
  </div> 
  </div>
-
- </div>
-
- <div class="main_container_down">
 
 <div class="container_table">
 

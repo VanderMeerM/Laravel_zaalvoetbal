@@ -15,23 +15,24 @@
 
              <a href="../statistics"><x-menubutton> Statistieken </x-menubutton></a>
            
+             </div>
+
              @guest
              <form action=" {{ route('auth.login') }}" method="get">
               @csrf
 
             <button class="rounded-md px-3 py-2 text-sm font-medium text-yellow-300 hover:text-yellow-100" type="submit">Inloggen </button>
-              <!--<a href="../login" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Inloggen</a>-->
             </form>
             @endguest
 
             @auth
 
-             <div class="flex space-x-4">
+             <div class="flex space-x-4" style="position: absolute; right: 10%; margin-top: -2%;">
+
             <a class="rounded-md px-3 py-2 text-sm font-medium text-black-500">  Hallo, {{ Auth::user()->firstname }}!</a>
 
              
-              </div>
-            
+                       
               <form method="post" action= "../logout">
               @csrf
             <button type="submit"> <img class="logout" src="../logout.png"></button>

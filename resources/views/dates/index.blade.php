@@ -35,6 +35,7 @@
 
 <div class="season_selection">
 
+Seizoen 
 <select name="selected_season" onchange="this.form.submit()">
 
 <option disabled>Selecteer seizoen</option>
@@ -43,7 +44,7 @@
 
 <option value="{{ $as->season }}"
 @if ($as->season == $selected_season) selected @endif >
-{{ $as->season }}</option> 
+{{ $as->season }} - {{ $as->season+1 }} </option> 
 
 @endforeach
 
@@ -66,6 +67,10 @@ echo date_format($single_date, "d-m-Y"); @endphp
 
 </a>
 
+@if ($date->match_nr > 1) 
+- potje {{ $date->match_nr }} 
+@endif
+
 </x-dateblock>
 
 @if (Auth::user()->isAdmin === 'on') 
@@ -84,14 +89,6 @@ echo date_format($single_date, "d-m-Y"); @endphp
 @endif
 
 </div>
-
-<!--
-<form id="delete_date" method="post" action='/dates/{{ $date->id }}' class="hidden">
-@csrf
-@method('DELETE')
-
-</form>
--->
 
 @endforeach
 

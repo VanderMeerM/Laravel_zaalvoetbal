@@ -33,6 +33,12 @@ flex-direction: column;
 width: 50%;
 }
 
+#copy_button {
+    margin: 2% 0 2% 2%;
+    background-color: lightgray;
+    padding: 1%;
+}
+
 .center, 
 .season_selection {
     display: flex;
@@ -51,6 +57,18 @@ width: 50%;
     margin: 3% auto 0;
 }
 
+.orange_team_dot,
+.yellow_team_dot {
+    display: flex;
+    width: 20px;
+    border-radius: 50%;
+    height: 20px;
+    background-color: orange;
+}
+
+.yellow_team_dot {
+    background-color: #eded08f0;
+}
 
  #chart_team {
     width: 200px;
@@ -75,7 +93,7 @@ align-content: center;
 #ball {
     width: 20px;
     height: auto;
-    margin-left: 3px;
+    margin-left: 5px;
 }
 
 .team_picture_login {
@@ -88,7 +106,7 @@ align-content: center;
 .logout {
     position:absolute;
     right: 0;
-    margin-right: 2%; 
+    margin-right: -35%; 
     width: 30px;
     cursor: pointer;
     height: auto;

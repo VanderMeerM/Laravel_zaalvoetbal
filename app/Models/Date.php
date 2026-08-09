@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Date extends Model
 {
-    protected $fillable = ['date', 'season'];
+    protected $fillable = ['date', 'season', 'match_nr'];
 
     public function scopeCurrent_season() {
     

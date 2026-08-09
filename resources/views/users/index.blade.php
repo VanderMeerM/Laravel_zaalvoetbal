@@ -15,17 +15,23 @@ Speler toevoegen
 
 <body>
 
+@if ($players_with_ball > 2) 
+
+<x-note>Er zijn meer dan twee spelers met een bal. <br> Verwijder het vinkje bij de speler die geen bal (meer) heeft.  
+</x-note>
+
+@endif
+
 @foreach ($users as $user)
 
-<div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center; {{ $user->isActive === 'N'? "opacity: 50%;" : null }}">
 
 @if (Auth::user()->isAdmin === 'on') 
 
 <div class="container_activity">
   <a class="user_activity" href="../setactivity/{{ $user->id }}"> 
-  {{ $user->isActive === 'Y' ?  "❌" : "✅" }}</a>
+  {{ $user->isActive === 'Y' ?  "🔴" : "🟢" }}</a>
 </div>
-<!-- <button form="delete_user" class="flex-initial text-red-500 mr-20"> X </button> -->
 
  @endif
 
@@ -44,28 +50,26 @@ Speler toevoegen
 
 </x-playerblock>
 
+
  <div style="display: flex; align-content: center; flex-wrap: wrap;">
 
- <form action='../hasball/{{ $user->id }}' method="post">
+ @if ($user->isActive === 'Y')
+
+ <form action={{ route('user.hasball', ['id' => $user->id]) }} method="post">
+
  @csrf
  @method('POST')
 
  <div style="display:flex;">
-  <input name="hasBall" @if ($user->hasBall) checked @endif type="checkbox" onclick="this.form.submit()">
+  <input name="hasBall" @if ($user->hasBall) checked @endif type="checkbox" onclick=this.form.submit()>
    <img id="ball" src= {{url('ball.png')}} > 
 </div>
  </form>
 
+@endif
+
 </div>
-
-
 </div>
-
-<form id="delete_user" method="post" action='/users/{{ $user->id }}' class="hidden">
-@csrf
-@method('DELETE')
-
-</form>
 
 @endforeach
 

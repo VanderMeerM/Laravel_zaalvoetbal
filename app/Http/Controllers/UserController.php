@@ -23,7 +23,12 @@ class UserController extends Controller
 
        $users = User::orderBy('firstname')->get();
 
-        return view('users.index', compact('users'));
+      $players_with_ball = User::where('hasball', '=', 'on')->count();
+
+        return view('users.index', [
+            'users' => $users, 
+            'players_with_ball' => $players_with_ball
+            ]);
     }
 
     /**
@@ -40,7 +45,7 @@ class UserController extends Controller
     }
     
 
-    /**
+   /**
      * Store a newly created resource in storage.
      */
     public function store()
@@ -97,11 +102,10 @@ $new_user = User::create(
     if (Auth::guest()) {
         return redirect('./login');
     }
-        //$player = Player::select()->where('id', '=', $id)->get();
         $user = User::findOrFail($id);
         $logged_in_user = Auth::user()->id;
 
-              return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user]);
+        return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user]);
     }
        
 
@@ -113,7 +117,7 @@ $new_user = User::create(
        //  
     }
 
-      public function hasball($id)
+     public function hasball($id)
     {
 
      $user = User::findOrFail($id);
@@ -131,11 +135,13 @@ $new_user = User::create(
         ]);
 
     }
-        return view('users.index', ['users' => User::orderBy('firstname')->get()]);
+        return redirect()->route('users.index', [
+            'users' => User::orderBy('firstname')->get(),
+            ]);
         
     }
 
-     public function setActivity($id)
+       public function setActivity($id)
     {
 
       $user = User::findOrFail($id); 
@@ -214,4 +220,11 @@ $new_user = User::create(
         
           return redirect('/users'); 
     }
+/*
+    <form id="delete_user" method="post" action='/users/{{ $user->id }}' class="hidden">
+@csrf
+@method('DELETE')
+
+</form>
+*/
 }

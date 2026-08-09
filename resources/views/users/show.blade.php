@@ -12,13 +12,17 @@
    
  <div>
 
- <!--
-@if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') )
- <p>Zelfde gebruiker als ingelogde gebruiker of admin </p>
-@endif
---->
+@if ($user->isActive === 'N' && $logged_in_user == $user->id)  
 
-<div style="display: flex; justify-content: center;">
+<x-note> Momenteel is je gebruikersstatus inactief. <br>Neem contact op met een beheerder.</x-note>
+
+@elseif ($user->isActive === 'N')
+
+<x-note> Deze gebruikers is momenteel niet actief.</x-note>
+
+@endif  
+
+<div class="center">
 
   <form method="post" action= {{ route('users.update', 
   ['user' => $user->id]) }}>

@@ -13,7 +13,7 @@
 
 @if (Auth::user()->isAdmin === 'on') 
 
-<input id="date" placeholder="JJJJ-MM-DD" name="date" class="block w-1/8 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+<input id="date" type="date" placeholder="JJJJ-MM-DD" name="date" class="block w-1/8 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
 <input type="hidden" value= {{ $current_season }} name="current_season">
 
 

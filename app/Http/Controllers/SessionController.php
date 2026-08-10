@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Models\Date;
 
 class SessionController extends Controller
 {
@@ -30,9 +31,17 @@ class SessionController extends Controller
         }
 
          $request->session()->regenerate();
-                   
-         return to_route('dates.index');
 
+         $upcoming_date = Date::where('date', '>=', date('Y-m-d H:i:s'))->orderby('date', 'asc')->first();
+
+         if (is_null($upcoming_date)) {
+
+          return to_route('dates.index');
+
+         } else {
+                   
+          return to_route('dates.show', ['date' => $upcoming_date->id]);
+         }
          
        }
 

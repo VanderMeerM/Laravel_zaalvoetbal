@@ -4,12 +4,10 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<x-header></x-header>
-
-
 <body>
 
-<a></a>
+<x-header></x-header>
+
 
 <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} 
 
@@ -33,7 +31,7 @@
 
  @endif 
 
-<x-center> 
+ 
 
 <table style="margin: 2% auto">
 
@@ -103,12 +101,10 @@ href="/change_presence/{{ $match->id }}"
 
 @endforeach
 
-
 </table> 
 
- <div class="text-4xl font-bold ml-5 mt-3"> Uitslag </div>
+ <div class="text-4xl font-bold ml-5 mt-3 text-center"> Uitslag </div>
 
- </x-center>
 
  <form method="post" action="/dates/{{ $current_date_id->id}}">
 @csrf 
@@ -146,3 +142,6 @@ type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-
 @endif
 
 </form>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ class HttpsRedirect
     {
         if (! $request->isSecure() && app()->isProduction()) {
 
-            return redirect()->secure($request->getRequestUri()); 
+            return redirect()->secure($request->getRequestUri());
         }
         
         return $next($request);

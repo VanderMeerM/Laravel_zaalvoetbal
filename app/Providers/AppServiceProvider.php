@@ -20,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        URL::forceHttps(app()->isProduction());
+        URL::forceHttps(app()->isProduction()); 
     }
 }

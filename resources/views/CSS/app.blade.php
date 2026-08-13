@@ -91,9 +91,7 @@ align-content: center;
 }
 
 #ball {
-    width: 20px;
-    height: auto;
-    margin-left: 5px;
+   margin-left: 5px;
 }
 
 .team_picture_login {
@@ -107,10 +105,8 @@ align-content: center;
     position:absolute;
     right: 0;
     margin-right: -35%; 
-    width: 30px;
     cursor: pointer;
-    height: auto;
-}
+   }
 
 
 </style>

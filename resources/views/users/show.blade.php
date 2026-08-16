@@ -24,6 +24,23 @@
 
 <div class="center">
 
+@auth
+
+<div> 
+
+<form action=" {{ route('upload.uploadprofileimg') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="file">
+    <input type="hidden" name="user_id" value = {{  $user->id }}>
+    <button type="submit">Foto uploaden</button>
+</form>
+
+</div>
+
+@endauth
+
+<div class="container_form_player">
+
   <form method="post" action= {{ route('users.update', 
   ['user' => $user->id]) }}>
 
@@ -34,6 +51,7 @@
 <img id="profile_img" src="/spelers/{{ $user->image }}">
  </div>
 @endif
+
 
 <div class="w-full max-w-lg mt-20">
   <div class="flex flex-wrap -mx-3 mb-6">
@@ -94,9 +112,9 @@
 
  @if (Auth::user()->isAdmin === 'on')
 
-  <div class="sm:col-span-4">
-        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Admin</label>
-          <div class="mt-2">
+  <div class="sm:col-span-4 flex flex-direction-row">
+        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Is administrator</label>
+          <div class="mt-2 ml-2">
             <input id="isAdmin" type="checkbox" name="isAdmin" 
             @if ($user->isAdmin === 'on') checked @endif />
           </div>
@@ -106,7 +124,7 @@
 
   
  @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
-  <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-10">Opslaan</button>
+  <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
  @endif
 
 
@@ -131,6 +149,8 @@
     </div>
   </div>
 @endif
+
+</div>
 
 </div>
 

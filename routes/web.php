@@ -3,6 +3,7 @@
 use App\Http\Controllers\MatchroundController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileImgController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SessionController;
 use App\Models\User;
@@ -37,6 +38,8 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/users/{id}', [UserController::class, 'update']);
 Route::get('/setactivity/{id}', [UserController::class, 'setActivity']);
 Route::post('/hasball/{id}', [UserController::class, 'hasball']) -> name('user.hasball');
+
+Route::post('/upload_profile_img', [UserController::class, 'upload_profile_img'])-> name('upload.uploadprofileimg');
 
 Route::resource('users', UserController::class)->except('destroy');
 

@@ -46,6 +46,14 @@ width: 50%;
     padding: 2%;
 }
 
+.center {
+    flex-direction: column;
+}
+
+.container_form_player {
+    margin: 0 auto;
+}
+
 .season_selection {
     width: fit-content;
     margin: 0 auto;

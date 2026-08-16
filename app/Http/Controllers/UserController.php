@@ -9,6 +9,7 @@ use App\Models\Matchround;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Validation\Rules\Password;
 
@@ -117,6 +118,22 @@ $new_user = User::create(
        //  
     }
 
+     public function upload_profile_img(Request $request): RedirectResponse
+    {
+         $request->validate([
+            'file' => 'required|mimes:jpg,JPG,png,PNG|max:2048',
+        ]);
+        
+       $profile_img_user = User::find($request->input('user_id'))->id . '_' . User::find($request->input('user_id'))->firstname. '_' . strtotime(now()) . '.' .$request->file->extension();
+         
+       $request->file->move(public_path('spelers'), $profile_img_user);
+          
+       User::where('id', '=',$request->input('user_id'))->update(['image' => $profile_img_user]);
+    
+       return back();
+      
+    }
+    
      public function hasball($id)
     {
 

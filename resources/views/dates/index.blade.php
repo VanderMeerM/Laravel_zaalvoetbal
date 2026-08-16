@@ -55,7 +55,7 @@ Seizoen
 
 @foreach ($dates as $date)
 
-<div class="center" style="padding: 0%">
+<div class="center" style="padding: 0%; flex-direction: row;">
 
 <x-dateblock>
 

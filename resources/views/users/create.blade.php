@@ -49,26 +49,14 @@
           </div>
         </div>  
         
-        <div class="sm:col-span-4">
-        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Admin</label>
-          <div class="mt-2">
-            <input id="isAdmin" type="checkbox" name="isAdmin" />
+      <div class="sm:col-span-4 flex flex-direction-row">
+        <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Is administrator</label>
+          <div class="mt-2 ml-2">
+            <input id="isAdmin" type="checkbox" name="isAdmin"> 
           </div>
-        </div>   
+  </div> 
 
-        @php 
-/*
-if (date('m') >= 8) {
-$current_season = date('Y'); 
-} else {
-$current_season = (date('Y') - 1);
-}
-*/
-@endphp
-
-
-
-        </div>
+</div>
         <div>     
           @if($errors->any())
           <ul>
@@ -82,7 +70,7 @@ $current_season = (date('Y') - 1);
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <a href="../users" class="text-sm/6 font-semibold text-gray-900">Annuleren</a>
-    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Opslaan</button>
+  <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
   </div>
 </form>
 

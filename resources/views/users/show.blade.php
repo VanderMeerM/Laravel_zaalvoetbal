@@ -118,7 +118,7 @@
             <input id="isAdmin" type="checkbox" name="isAdmin" 
             @if ($user->isAdmin === 'on') checked @endif />
           </div>
-        </div> 
+  </div> 
 
   @endif
 

@@ -28,12 +28,16 @@
 
 <div> 
 
+@if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
+
 <form action=" {{ route('upload.uploadprofileimg') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="file">
     <input type="hidden" name="user_id" value = {{  $user->id }}>
     <button type="submit">Foto uploaden</button>
 </form>
+
+@endif
 
 </div>
 

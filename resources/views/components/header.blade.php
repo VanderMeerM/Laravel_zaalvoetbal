@@ -13,7 +13,7 @@
 
             <a href="../dates"><x-menubutton> Speeldata </x-menubutton></a>
 
-             <a href="../statistics"><x-menubutton> Statistieken </x-menubutton></a>
+             <a href="../statistieken"><x-menubutton> Statistieken </x-menubutton></a>
            
              </div>
 
@@ -27,9 +27,21 @@
 
             @auth
 
+          @php
+          if (date('H') > 0 && date('H') < 7) { 
+          $greet = 'Goedenacht';
+          } elseif (date('H') >= 7 && date('H') < 12) {
+          $greet= 'Goedemorgen';
+          } elseif (date('H') >= 12 && date('H') < 18) {
+          $greet = 'Goedemiddag';
+          } else {
+          $greet = 'Goedenavond';
+          }
+          @endphp
+
              <div class="flex space-x-4" style="position: absolute; right: 10%; margin-top: -2%;">
 
-            <a class="rounded-md px-3 py-2 text-sm font-medium text-black-500">  Hallo, {{ Auth::user()->firstname }}!</a>
+            <a class="rounded-md px-3 py-2 text-sm font-medium text-black-500"> @php echo $greet @endphp {{ Auth::user()->firstname }}!</a>
 
              
                        

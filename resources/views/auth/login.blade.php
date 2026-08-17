@@ -15,9 +15,9 @@
   
        <div class="m-auto pb-12 w-1/2">
      
-      <div class="m-10" style="display:flex; flex-direction:column; justify-content: center;">
+      <div class="m-10" style="display:flex; flex-direction:column">
     
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-4 m-auto">
           <label for="email" class="block text-sm/6 font-medium text-gray-900">E-mailadres</label>
           <div class="mt-2">
     <input name="email" id="email" value= " {{ old('email') }}" type="email" class="
@@ -26,7 +26,7 @@
           </div>
         </div>
 
-         <div class="sm:col-span-4 mt-2">
+         <div class="sm:col-span-4 mt-2 m-auto">
           <label for="password" class="block text-sm/6 font-medium text-gray-900">Wachtwoord</label>
           <div class="mt-2">
       <input name= 'password' type="password" 
@@ -36,15 +36,19 @@
           </div>
         </div>  
 
-       </div>
+      
        <div>     
         
             <x-nopassword></x-nopassword>
             <x-error> </x-error>
      </div>
-             
- <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm">Log in</button>
-  </div>
+
+     <div style="display: flex; justify-content: center;">
+ <button type="submit" class=" w-36 rounded-md bg-orange-500 px-3 py-2 mt-4 text-sm font-semibold text-yellow-300 shadow-sm">Log in</button>
+</div>
+
+</div> 
+</div>
 </form>
 
 </body>

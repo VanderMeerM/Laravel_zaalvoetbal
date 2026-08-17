@@ -32,9 +32,14 @@
 
 <form action=" {{ route('upload.uploadprofileimg') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="file">
+    <input type="file" name="file" id="fileInput" class="hidden-file-input">
+
+    <label for="fileInput" class="upload-file-button"> 1. Kies een foto
+   <!-- <span id="fileNameDisplay" class="file-name">No file selected</span> -->
+    </label>
+
     <input type="hidden" name="user_id" value = {{  $user->id }}>
-    <button type="submit">Foto uploaden</button>
+    <button class="upload-file-button" type="submit">2. Upload foto</button>
 </form>
 
 @endif
@@ -42,6 +47,20 @@
 </div>
 
 @endauth
+
+<script>
+const fileInput = document.getElementById('fileInput');
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+ 
+fileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    fileNameDisplay.textContent = file.name; // Show selected file name
+  } else {
+    fileNameDisplay.textContent = 'No file selected'; // Reset if no file
+  }
+});
+</script>
 
 <div class="container_form_player">
 

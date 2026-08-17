@@ -65,6 +65,30 @@ width: 50%;
     margin: 3% auto 0;
 }
 
+.hidden-file-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+ 
+/* Style the custom button (label) */
+.upload-file-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #F97316;
+  color: #FDE047;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
 .orange_team_dot,
 .yellow_team_dot {
     display: flex;

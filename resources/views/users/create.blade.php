@@ -5,6 +5,8 @@
 
 <body>
 
+@if (Auth::user()->isAdmin === 'on')  
+
 <form method="post" action="/users">
   @csrf 
   
@@ -74,7 +76,8 @@
   </div>
 </form>
 
- 
+ @endif
+
 </body>
 
 </html>

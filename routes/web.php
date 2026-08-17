@@ -59,5 +59,5 @@ Route::patch('/dates/{date}', [DateController::class, 'update']);
 Route::delete('/dates/delete/{date}', [DateController::class, 'destroy'])
 ->name('dates.delete');
 
-Route::get('/statistics', [StatisticController::class, 'index']);
-Route::post('/statistics', [StatisticController::class, 'change_season'])->name('statistics.change_season'); 
+Route::get('/statistieken', [StatisticController::class, 'index']);
+Route::post('/statistieken', [StatisticController::class, 'change_season'])->name('statistics.change_season'); 

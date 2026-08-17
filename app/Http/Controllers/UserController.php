@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\File;
+
 
 use Illuminate\Validation\Rules\Password;
 
@@ -124,6 +126,12 @@ $new_user = User::create(
             'file' => 'required|mimes:jpg,JPG,png,PNG|max:2048',
         ]);
         
+       $old_img_profile = User::find($request->input('user_id'))->image; 
+
+       if ( $old_img_profile != '' ) {
+            File::delete(public_path('spelers/'.$old_img_profile));
+       }
+
        $profile_img_user = User::find($request->input('user_id'))->id . '_' . User::find($request->input('user_id'))->firstname. '_' . strtotime(now()) . '.' .$request->file->extension();
          
        $request->file->move(public_path('spelers'), $profile_img_user);

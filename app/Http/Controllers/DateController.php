@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 class DateController extends Controller
 
 {
+    
         public function index()
     {
          if (Auth::guest()) {
@@ -234,10 +235,20 @@ class DateController extends Controller
       'date' => ['required']          
     ]);
 
+  $input_month = date('m', strtotime(request('date')));
+  $input_season = 0;
+
+  if ($input_month > 7) {
+    $input_season = date('Y', strtotime(request('date')));
+  } else {
+    $input_season = date('Y', strtotime(request('date'))) - 1;
+
+  }
+
 $new_date = Date::create(   
      [
         'date' => request('date'),
-        'season' => request('current_season'),
+        'season' => $input_season,
         'match_nr' => 1,
         'created_at' => now()
                       

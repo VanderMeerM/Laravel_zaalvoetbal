@@ -1,4 +1,4 @@
-<div class="text-right mr-20 mt-5">
+<div class="text-center mt-5">
 
 @php
 

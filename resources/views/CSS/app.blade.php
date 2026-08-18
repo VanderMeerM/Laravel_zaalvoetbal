@@ -72,6 +72,10 @@ width: 50%;
   height: 0;
   overflow: hidden;
 }
+
+#upload_btns {
+    display: block;
+}
  
 /* Style the custom button (label) */
 .upload-file-button {

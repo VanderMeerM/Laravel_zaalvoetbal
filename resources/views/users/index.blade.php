@@ -1,6 +1,6 @@
 @extends('CSS.app')
 
-<script src="https://cdn.tailwindcss.com"></script>
+ @vite('resources/css/app.css')
 
 <x-header>
 </x-header>

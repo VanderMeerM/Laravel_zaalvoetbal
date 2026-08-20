@@ -3,7 +3,6 @@
 use App\Http\Controllers\MatchroundController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileImgController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SessionController;
 use App\Models\User;

@@ -3,7 +3,7 @@
 
  <script src="https://cdn.tailwindcss.com"></script> 
 
-<x-header>    </x-header>
+<x-header> </x-header>
 
 <html>
 <body>

@@ -1,10 +1,7 @@
 
 @extends('CSS.app')
 
-<script src="https://cdn.tailwindcss.com"></script> 
-
 <x-header></x-header>
-
 
 <div class="place-items-end mt-6 mr-4">
 

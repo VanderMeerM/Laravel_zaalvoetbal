@@ -307,14 +307,20 @@ $new_date = Date::create(
         $date = Date::findOrFail($id);
         
         $matchesdate = Matchround::select()->where('date_id', '=', $date->id)->get();
-        
-       foreach ($matchesdate as $md) {
+
+        $spareplayers_date = Spareplayer::select()->where('date_id', '=', $date->id)->get();
+
+        foreach ($matchesdate as $md) {
        $md->delete();    
+        }
+
+       foreach ($spareplayers_date as $spd) {
+       $spd->delete();    
         }
         
         $date->delete();
         
-          return redirect('/dates'); 
+        return redirect('/dates'); 
     }
 
 };  

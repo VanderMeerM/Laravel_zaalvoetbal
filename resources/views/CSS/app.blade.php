@@ -81,10 +81,6 @@ width: 50%;
   overflow: hidden;
 }
 
-#upload_btns {
-    display: block;
-}
- 
 /* Style the custom button (label) */
 .upload-file-button {
   display: inline-flex;

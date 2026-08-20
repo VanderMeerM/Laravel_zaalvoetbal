@@ -15,7 +15,7 @@
 
 <div class="mt-5">
 <x-addbtn>
-<button type="submit">Voeg datum toe</button>
+<button type="submit">Datum toevoegen</button>
 </x-addbtn>
 </div>
 

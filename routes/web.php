@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MatchroundController;
+use App\Http\Controllers\SpareplayerController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticController;
@@ -19,6 +20,10 @@ Route::post('/logout', [SessionController::class, 'destroy'])->name('auth.logout
 
 Route::get('/change_presence/{id}', action: [MatchroundController::class, 'change_presence']);
 Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_team']);
+
+Route::post('/add_spare_player/{id}', action: [SpareplayerController::class, 'store']);
+Route::get('/change_team_spare/{id}', action: [SpareplayerController::class, 'change_team']);
+
 
 
 Route::get('/users', function() {

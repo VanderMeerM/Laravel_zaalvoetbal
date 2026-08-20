@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Date;
 use App\Models\Matchround;
+use App\Models\Spareplayer;
 use App\Models\User;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Http\Request;
-
 class DateController extends Controller
 
 {
-    
-        public function index()
+  public function index()
     {
          if (Auth::guest()) {
         return redirect('./login');
@@ -60,14 +56,19 @@ class DateController extends Controller
       $current_season = Date::current_season();
 
       $matchround_dates =
-
       Matchround::join('users', 'users.id', '=','matchrounds.user_id')->
       select('matchrounds.*', 'users.firstname')->where('matchrounds.date_id', '=', $id)->orderBy('users.firstname')->get();
 
+      $spareplayers = 
+      Spareplayer::where('date_id','=',$id)->orderBy('name')->get();
+
       $num_present = $matchround_dates->where('present', '=', '1')->count();
       $num_absent = $matchround_dates->where('present', '=', '0')->count();
+      $num_present_spare = $spareplayers->where('present', '=', '1')->count();
+      $num_absent_spare = $spareplayers->where('present', '=', '0')->count();
       $current_date_id = Date::findOrFail($id);
       $current_date = $current_date_id->date;
+      $current_season = $current_date_id->season;
       $match_nr = $current_date_id->match_nr;
       $logged_in_user = Auth::user()->id;
       $date_create = date_create($current_date_id->date);
@@ -77,6 +78,8 @@ class DateController extends Controller
        return view('show',  [
         'matchround' => $matchround_dates,
         'num_present' => $num_present,
+        'num_present_spare'=> $num_present_spare,
+        'num_absent_spare' => $num_absent_spare,
         'num_absent' => $num_absent,
         'current_date_id' => $current_date_id,
         'current_date'=> $current_date,
@@ -85,7 +88,8 @@ class DateController extends Controller
         'date_create' => $date_create,
         'teams' => $teams,
         'users_with_ball' => $users_with_ball,
-        'logged_in_user' => $logged_in_user
+        'logged_in_user' => $logged_in_user, 
+        'spareplayers' => $spareplayers
 
        ]);
       
@@ -99,8 +103,6 @@ class DateController extends Controller
 
     $old_date = Date::find($id);
 
-    //dd($old_date);
-
     
      $new_date = Date::create(   
      [
@@ -112,6 +114,25 @@ class DateController extends Controller
     ]);
 
  $users = User::where('isactive','=','Y')->get(); 
+
+ $spareplayers = Spareplayer::where('date_id', '=', $old_date->id)->get();
+
+ foreach ($spareplayers as $sp) {
+
+ Spareplayer::create(
+    [
+    'date' => now(),
+    'name' => $sp->name,
+    'team_id' => $sp->team_id,
+    'date_id' => $new_date->id, 
+    'present' => 1,
+    'season' => $sp->season,
+    'created_at' => now(),
+    'updated_at' => now()
+
+    ]
+ );
+ }
 
  foreach ($users as $user) {
 
@@ -132,7 +153,10 @@ class DateController extends Controller
         );
      
     }
-    return to_route('dates.show', ['date' => $new_date->id]);
+    return to_route('dates.show', [
+        'date' => $new_date->id, 
+        'spareplayers' => $spareplayers
+        ]);
           
     }
 

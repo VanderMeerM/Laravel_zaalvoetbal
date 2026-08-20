@@ -16,7 +16,11 @@
 @endif
 </div>
 
- @if (Auth::user()->isAdmin === 'on')
+ @if ( (Auth::user()->isAdmin === 'on') && (strtotime($current_date) + 86400) > strtotime(date('d-m-Y')) )
+
+<div style="display: flex;">
+
+<div style="width: 50%;">
 
 <form action= {{ route('dates.copy', ['id' => $current_date_id]) }} method="post"> 
 @csrf 
@@ -29,15 +33,31 @@
 
 </form>
 
- @endif 
+</div>
 
- 
+<div class="place-items-end" style="width: 50%;">
+
+<form action="../add_spare_player/{{$current_date_id->id}}" method="post">
+@csrf
+@method('POST')
+
+<input name="spare_player" class="block m-3 ml-0 pl-2 border-2" type="text" placeholder="Naam speler"> 
+<input class="rounded-md bg-orange-500 px-3 py-2 text-sm font-medium text-yellow-300" 
+    type="submit" value="Reservespeler toevoegen">
+<input type="hidden" name="season" value= {{ $current_season }}>
+
+  </form>
+  
+</div>
+</div>
+
+ @endif 
 
 <table style="margin: 2% auto">
 
 <tr>
-<th>Aanwezig ({{ $num_present }})</th>
-<th>Afwezig ({{ $num_absent }})</th>
+<th>Aanwezig ({{ $num_present + $num_present_spare}})</th>
+<th>Afwezig ({{ $num_absent + $num_absent_spare }})</th>
 <th>Team</th>
 </tr>
 
@@ -51,7 +71,8 @@
 
 <a style="color:green; display:flex;" 
 
-@if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
+@if ( ( ($logged_in_user == $match->user_id) && (strtotime($current_date) + 86400) > strtotime(date('d-m-Y')) )
+|| (Auth::user()->isAdmin === 'on')) 
 href="/change_presence/{{ $match->id }}" 
 @endif >  {{  $match->firstname }} 
 
@@ -69,7 +90,8 @@ href="/change_presence/{{ $match->id }}"
 <td>
 <a style="color:red; display:flex;" 
 
-@if ( ($logged_in_user == $match->user_id) || (Auth::user()->isAdmin === 'on')) 
+@if ( ( ($logged_in_user == $match->user_id) && (strtotime($current_date) + 86400) > strtotime(date('d-m-Y')) )
+|| (Auth::user()->isAdmin === 'on')) 
 href="/change_presence/{{ $match->id }}" 
 @endif >{{  $match->firstname }} 
 
@@ -93,13 +115,51 @@ href="/change_presence/{{ $match->id }}"
 
 @endif
 
-
-
 </td>
 
 </tr>     
 
 @endforeach
+
+@if ($num_present_spare > 0) 
+
+@foreach($spareplayers as $sp)
+
+<tr style="background-color: #e6e7df;">
+
+@if ($sp->present) 
+
+<td> 
+<a style="color:green; display:flex;">{{  $sp->name }} </a> 
+</td>
+
+<td></td>
+
+@else
+
+<td></td>
+
+<td>
+<a style="color:red; display:flex;"> {{  $sp->name }} </a>
+
+</td>
+
+@endif
+
+<td>
+<a 
+ 
+@if (Auth::user()->isAdmin === 'on') href="/change_team_spare/{{ $sp->id }}" 
+@endif
+> 
+<span class= {{ $sp->team_id == 1 ? "orange_team_dot" : 'yellow_team_dot' }} ></span></a> 
+</td>
+
+</tr>
+
+@endforeach
+
+@endif
 
 </table> 
 

@@ -29,6 +29,9 @@
             @auth
 
           @php
+
+          date_default_timezone_set('Europe/Amsterdam');
+
           if (date('H') > 0 && date('H') < 7) { 
           $greet = 'Goedenacht';
           } elseif (date('H') >= 7 && date('H') < 12) {

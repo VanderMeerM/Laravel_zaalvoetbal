@@ -29,7 +29,7 @@
 
 @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
 
-<!-- <button id="show_upload_btns" class="upload-file-button" style="margin-bottom: 2%;">Upload foto</button> -->
+<div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">(nieuwe) foto uploaden?</div>
 
 <div id="upload_btns">
 
@@ -65,13 +65,8 @@ fileInput.addEventListener('change', (e) => {
     fileNameDisplay.textContent = 'No file selected'; // Reset if no file
   }
 });
-
-/*
-document.getElementById('show_upload_btns').addEventListener('çlick', () => {
- document.getElementById('upload_btns').style.display === 'block';
-})
-*/
 </script>
+
 
 <div class="container_form_player">
 

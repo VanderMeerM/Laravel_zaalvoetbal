@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Matchround;
-use App\Models\Team;
 use App\Models\Date;
 
-
-use Illuminate\Http\Request;
 
 class MatchroundController extends Controller
 {
@@ -75,5 +72,28 @@ class MatchroundController extends Controller
       'date' => $matchround->date_id
       ]); 
    
+    }
+
+    public function store($id) {
+
+    $id = Date::find($id);
+    $season = request('season');
+    $player = request('spare_player');
+
+    Matchround::create([
+      'date' => now(),
+      'user_id' => 0,
+      'team_id' => 1,
+      'date_id' => $id->id, 
+      'season' => $season,
+      'present' => 1,
+      'spare_name' => $player,
+      'created_at' => now()
+    ]);
+
+      return to_route('dates.show', [
+      'date' => $id
+      ]); 
+
     }
 }

@@ -71,7 +71,7 @@
              
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <a href="../users" class="text-sm/6 font-semibold text-gray-900">Annuleren</a>
+    <a href="../users" class="rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm mt-3 mb-10">Annuleren</a>
   <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
   </div>
 </form>

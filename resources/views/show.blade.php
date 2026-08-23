@@ -40,7 +40,7 @@
 @csrf
 @method('POST')
 
-<input name="spare_player" class="block m-3 ml-0 pl-2 border-2" type="text" placeholder="Naam speler"> 
+<input name="spare_player" class="block m-3 ml-0 pl-2 border-2" type="text" placeholder="Naam invaller"> 
 <input class="rounded-md bg-orange-500 px-3 py-2 text-sm font-medium text-yellow-300" 
     type="submit" value="Invaller toevoegen">
 <input type="hidden" name="season" value= {{ $current_season }}>
@@ -182,7 +182,7 @@ href="/change_presence/{{ $match->id }}"
 
 <input type="hidden" name="user_id" value={{ Auth::user()->id }}>
 <input style="border: 1px black solid; padding:2%;" placeholder="Schrijf een reactie" name="description" id="description"> 
-<input class="invisible" type="submit" value="+">
+<input class="invisible" type="submit">
 
 </form>
 </div>
@@ -191,12 +191,12 @@ href="/change_presence/{{ $match->id }}"
 @csrf 
 @method('PATCH')
 
-<div class="flex items-center justify-center mt-2 bg-black p-5 w-64 m-auto">
+<div class="flex items-center justify-center mt-2 bg-black p-7 w-80 m-auto">
  <div>
 
  <input 
- class="block w-16 m-4 rounded-md bg-orange-500 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
- type="number" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }}
+ class="block w-16 m-4 rounded-md bg-orange-500 px-3 py-5 text-center text-6xl text-gray-900 outline -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+ type="number" style="font-size: 40px;" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }}
  @if (Auth::user()->isAdmin !== 'on') disabled @endif
  >
 
@@ -205,8 +205,8 @@ href="/change_presence/{{ $match->id }}"
  <div>
 
  <input 
-class="block w-16 rounded-md bg-yellow-300 px-3 py-1.5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} 
+class="block w-16 rounded-md bg-yellow-300 px-3 py-5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+type="number" style="font-size: 40px;"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} 
  @if (Auth::user()->isAdmin !== 'on') disabled @endif 
 >
 
@@ -217,7 +217,7 @@ type="number"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-
  @if (Auth::user()->isAdmin === 'on') 
 
 <x-savebtn_data>
-   <button type="submit">Opslaan</button>
+   <button type="submit">Uitslag opslaan</button>
 </x-savebtn_data>
 
 @endif

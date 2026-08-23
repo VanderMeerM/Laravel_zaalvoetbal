@@ -4,6 +4,7 @@ use App\Http\Controllers\MatchroundController;
 use App\Http\Controllers\SpareplayerController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SessionController;
 use App\Models\User;
@@ -24,6 +25,7 @@ Route::get('/change_team/{id}', action: [MatchroundController::class, 'change_te
 Route::post('/add_spare_player/{id}', action: [SpareplayerController::class, 'store']);
 Route::get('/change_team_spare/{id}', action: [SpareplayerController::class, 'change_team']);
 
+Route::post('/add_comment/{id}', [CommentController::class, 'store']);
 
 
 Route::get('/users', function() {

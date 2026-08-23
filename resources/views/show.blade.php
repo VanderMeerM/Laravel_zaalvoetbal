@@ -8,7 +8,6 @@
 
 <x-header></x-header>
 
-
 <div class="text-4xl font-bold ml-5"> {{ date_format($date_create, 'd-m-Y') }} 
 
 @if ($match_nr > 1) 
@@ -43,7 +42,7 @@
 
 <input name="spare_player" class="block m-3 ml-0 pl-2 border-2" type="text" placeholder="Naam speler"> 
 <input class="rounded-md bg-orange-500 px-3 py-2 text-sm font-medium text-yellow-300" 
-    type="submit" value="Reservespeler toevoegen">
+    type="submit" value="Invaller toevoegen">
 <input type="hidden" name="season" value= {{ $current_season }}>
 
   </form>
@@ -163,7 +162,30 @@ href="/change_presence/{{ $match->id }}"
 
 </table> 
 
- <div class="text-4xl font-bold ml-5 mt-3 text-center"> Uitslag </div>
+
+@foreach ($comments_to_date as $ctd) 
+
+<div class="flex flex-col justify-center m-auto" style="width:fit-content;">
+
+<div> <i>{{ date('d-m-Y H:i', strtotime($ctd->date))}} - {{ App\Models\User::find($ctd->user_id)->firstname }} </i></div>
+<div> <strong><i>{{ $ctd->description }}</i></strong></div>
+
+</div>
+
+@endforeach 
+
+<div class="flex justify-center m-auto;">
+
+<form action="../add_comment/{{$current_date_id->id}}" method="post">
+@csrf 
+@method('POST')
+
+<input type="hidden" name="user_id" value={{ Auth::user()->id }}>
+<input style="border: 1px black solid; padding:2%;" placeholder="Schrijf een reactie" name="description" id="description"> 
+<input class="invisible" type="submit" value="+">
+
+</form>
+</div>
 
  <form method="post" action="/dates/{{ $current_date_id->id}}">
 @csrf 

@@ -201,10 +201,13 @@ $new_user = User::create(
 
       $user = User::findOrFail($id);    
 
-    /*  request()->validate([
-        'password' => ['required', Password::min(6), 'confirmed']
+      request()->validate([
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'email' => ['required', 'email', 'max: 254'],
+        'password' => ['required', Password::min(6)->letters()->numbers(), 'confirmed']
       ]);
-    */
+    
 
       $new_firstname = $request->firstname;
       $logged_in_user = Auth::user()->id;
@@ -216,10 +219,9 @@ $new_user = User::create(
             ['firstname' => $new_firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'isAdmin' => $request->isAdmin
-
-            //'password' => Hash::make($request->password), 
-            // 'birthdate' => $new_birthdate
+            'isAdmin' => $request->isAdmin,
+            'password' => $request->password, 
+             'birthdate' => $new_birthdate
              ]) ->save(); // Hash::make('12345')])->save()
 
               return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user ]);

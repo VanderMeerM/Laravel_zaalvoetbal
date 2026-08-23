@@ -8,6 +8,7 @@ use App\Models\Matchround;
 use App\Models\Spareplayer;
 use App\Models\User;
 use App\Models\Team;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 class DateController extends Controller
 
@@ -55,6 +56,8 @@ class DateController extends Controller
 
       $current_season = Date::current_season();
 
+      $comments_to_date = Comment::where('date_id', '=', $id)->get();
+     
       $matchround_dates =
       Matchround::join('users', 'users.id', '=','matchrounds.user_id')->
       select('matchrounds.*', 'users.firstname')->where('matchrounds.date_id', '=', $id)->orderBy('users.firstname')->get();
@@ -89,7 +92,9 @@ class DateController extends Controller
         'teams' => $teams,
         'users_with_ball' => $users_with_ball,
         'logged_in_user' => $logged_in_user, 
-        'spareplayers' => $spareplayers
+        'spareplayers' => $spareplayers, 
+        'comments_to_date'=> $comments_to_date,
+        // 'comment_writer'=> $comment_writer
 
        ]);
       

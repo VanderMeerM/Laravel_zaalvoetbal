@@ -151,33 +151,37 @@ fileInput.addEventListener('change', (e) => {
 
   @endif
 
+ @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
   
- @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
-  <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
- @endif
-
-
-  </form>
-
- @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
-  <div class="flex flex-wrap -mx-3 mb-6">
+ <div class="bg-red-50 p-3">
+ <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-        Nieuw Wachtwoord (nog niet actief)
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="password">
+        Nieuw Wachtwoord
       </label>
-      <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="password" id="grid-password" type="password" >
+      <input class="appearance-none block w-full text-gray-700 border bg-red-100 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      name="password" id="password" type="password" >
     </div>
   </div>
 
     <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-        Bevestig Nieuw Wachtwoord (nog niet actief)
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="password_confirmation">
+        Bevestig Nieuw Wachtwoord 
       </label>
-      <input class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="password_confirmation" id="grid-password" type="password" >
+      <input class="appearance-none block w-full text-gray-700 border bg-red-100 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      name="password_confirmation" id="password_confirmation" type="password" >
     </div>
   </div>
+  </div>
 @endif
+
+  
+ @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
+  <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
+ @endif
+
+</form>
 
 </div>
 

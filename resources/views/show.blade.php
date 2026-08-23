@@ -195,7 +195,7 @@ href="/change_presence/{{ $match->id }}"
  <div>
 
  <input 
- class="block w-16 m-4 rounded-md bg-orange-500 px-3 py-5 text-center text-6xl text-gray-900 outline -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+ class="block w-24 m-4 rounded-md bg-orange-500 px-3 py-5 text-center text-6xl text-gray-900 outline -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
  type="number" style="font-size: 40px;" id="goals_orange" name="goals_orange" value= {{ $current_date_id-> result_orange }}
  @if (Auth::user()->isAdmin !== 'on') disabled @endif
  >
@@ -205,7 +205,7 @@ href="/change_presence/{{ $match->id }}"
  <div>
 
  <input 
-class="block w-16 rounded-md bg-yellow-300 px-3 py-5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+class="block w-24 rounded-md bg-yellow-300 px-3 py-5 text-center text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 type="number" style="font-size: 40px;"  id="goals_yellow" name="goals_yellow" value= {{ $current_date_id-> result_yellow }} 
  @if (Auth::user()->isAdmin !== 'on') disabled @endif 
 >

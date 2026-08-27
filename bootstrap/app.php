@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
-        $middleware->append([HttpsRedirect::class]); 
+       $middleware->append([HttpsRedirect::class]); 
     })
     
     ->withExceptions(function (Exceptions $exceptions) {

@@ -1,7 +1,10 @@
 @extends( 'CSS.app')
  
-
- <script src="https://cdn.tailwindcss.com"></script> 
+<script src="https://cdn.tailwindcss.com"></script> 
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
 
 <x-header> </x-header>
 
@@ -20,7 +23,7 @@ Seizoen
 
 @foreach ($all_seasons as $as)
 
-<option value="{{ $as->season }}"
+<option style="text-align: center;" value="{{ $as->season }}"
 @if ($as->season == $selected_season) selected @endif >
 {{ $as->season }} - {{ $as->season+1 }}</option> 
 
@@ -34,6 +37,43 @@ Seizoen
 <div class="main_container_up">
 
  <div class="container_table">
+
+<div class="center">
+<canvas id="chart_presence"></canvas>
+</div>
+
+<script>
+
+const chartPresence = document.getElementById('chart_presence');
+
+const presenceOnDate = <?php echo json_encode($presence_on_date);?>;
+
+datesArray = [];
+
+const lineChart = new Chart(chartPresence, { 
+    type: 'line',
+    data: { 
+          
+      datasets: [
+        {    
+          label: "Aantal aanwezigen",    
+          borderColor: 'orange',
+          data: presenceOnDate,
+        }
+      ]
+    },
+    options: {     
+      plugins: {
+        labels: {
+          fontColor: 'black',
+          fontStyle: 'bolder',
+           }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  </script>
 
  <div style="text-align: center; margin-top: 3%">
 
@@ -61,12 +101,7 @@ Wedstrijdpercentage met minimaal 10 eigen spelers:
 </div>
 
 </div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
-  
+ 
 <script>
 
 const chartTeam = document.getElementById('chart_team');
@@ -78,7 +113,6 @@ const numDraw = <?php echo json_encode($num_draw);?>;
 const pieChart = new Chart(chartTeam, { 
     type: 'pie',
     data: {
-      //labels: ['Oranje', 'Geel'],
       datasets: [
         {
             backgroundColor: ['orange', 'yellow', 'white'],
@@ -100,9 +134,7 @@ const pieChart = new Chart(chartTeam, {
 
   </script>
 
-
-
- </div>
+</div>
 
  <div class="main_container_down">
 

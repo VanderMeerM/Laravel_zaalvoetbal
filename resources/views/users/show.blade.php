@@ -141,7 +141,7 @@ fileInput.addEventListener('change', (e) => {
 
  @if (Auth::user()->isAdmin === 'on')
 
-  <div class="sm:col-span-4 flex flex-direction-row">
+  <div class="sm:col-span-4 mb-3 flex flex-direction-row">
         <label for="isAdmin" class="block text-sm/6 font-medium text-gray-900">Is administrator</label>
           <div class="mt-2 ml-2">
             <input id="isAdmin" type="checkbox" name="isAdmin" 
@@ -160,7 +160,7 @@ fileInput.addEventListener('change', (e) => {
         Nieuw Wachtwoord
       </label>
       <input class="appearance-none block w-full text-gray-700 border bg-red-100 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-      name="password" id="password" type="password" >
+      name="password" id="password" type="password">
     </div>
   </div>
 
@@ -170,16 +170,14 @@ fileInput.addEventListener('change', (e) => {
         Bevestig Nieuw Wachtwoord 
       </label>
       <input class="appearance-none block w-full text-gray-700 border bg-red-100 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-      name="password_confirmation" id="password_confirmation" type="password" >
+      name="password_confirmation" id="password_confirmation" type="password">
     </div>
   </div>
   </div>
-@endif
 
-  
- @if ( ($logged_in_user == $user->id) || (Auth::user()->isAdmin === 'on') ) 
+   @endif
+
   <button type="submit" class="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-yellow-300 shadow-sm mt-3 mb-10">Opslaan</button>
- @endif
 
 </form>
 

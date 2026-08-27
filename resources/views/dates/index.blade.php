@@ -37,7 +37,7 @@ Seizoen
 
 @foreach ($all_seasons as $as)
 
-<option value="{{ $as->season }}"
+<option style="text-align: center;" value="{{ $as->season }}"
 @if ($as->season == $selected_season) selected @endif >
 {{ $as->season }} - {{ $as->season+1 }} </option> 
 
@@ -68,19 +68,24 @@ echo date_format($single_date, "d-m-Y"); @endphp
 
 </x-dateblock>
 
-@if (Auth::user()->isAdmin === 'on') 
+@if ( (Auth::user()->isAdmin === 'on') && 
+(strtotime(date('d-m-Y', strtotime($date->date))) >= strtotime(date('d-m-Y')) )) 
 
-<div style="align-items: center; justify-content: center; display: flex">
+<div style="align-items: center; display: flex">
 
 <form method="post" action=" {{ route('dates.delete', ['date' => $date->id]) }}">
     @csrf
 @method('DELETE')
 
-<input type="submit" class="flex-initial text-red-500 mr-20" value="X"> 
+<input type="image" name="submit" class="trash" src="./trash.png"> 
 
 </form>
 
 </div>
+
+@else 
+
+<div></div>
 @endif
 
 </div>

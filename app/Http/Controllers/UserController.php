@@ -61,10 +61,11 @@ class UserController extends Controller
          request()->validate([
         'firstname' => ['required'],
         'lastname' => ['required'],
-
+        'password' => ['required', Password::min(6)->letters()->numbers()]
     ]);
 
-$new_user = User::create(   
+
+    $new_user = User::create(   
      [
         'firstname' => request('firstname'),
         'lastname' => request('lastname'),
@@ -199,16 +200,23 @@ $new_user = User::create(
         return redirect('./login');
     }
 
-      $user = User::findOrFail($id);    
+       $user = User::findOrFail($id);    
 
-      request()->validate([
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'email' => ['required', 'email', 'max: 254'],
-        'password' => ['required', Password::min(6)->letters()->numbers(), 'confirmed']
+       request()->validate([
+        'firstname' => ['filled'],
+        'lastname' => ['filled'],
+        'email' => ['filled', 'email','max:254'],
+       
       ]);
-    
 
+      if ($request->password != '') {
+
+        request()->validate([
+         'password' => ['required', Password::min(6)->letters()->numbers(), 'confirmed']
+        ]);
+      }
+      
+    
       $new_firstname = $request->firstname;
       $logged_in_user = Auth::user()->id;
       $new_birthdate = $request->birthdate;
@@ -220,9 +228,14 @@ $new_user = User::create(
             'lastname' => $request->lastname,
             'email' => $request->email,
             'isAdmin' => $request->isAdmin,
-            'password' => $request->password, 
              'birthdate' => $new_birthdate
              ]) ->save(); // Hash::make('12345')])->save()
+
+             if ($request->password != '') {
+                $user->fill(
+                    ['password' => $request->password]
+                )->save();
+             }
 
               return view('/users.show', ['user' => $user, 'logged_in_user' => $logged_in_user ]);
         

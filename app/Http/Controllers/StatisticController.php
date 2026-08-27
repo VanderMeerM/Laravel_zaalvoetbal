@@ -30,7 +30,7 @@ class StatisticController extends Controller
 
       
     $numgames = Date::where('season','=',$selected_season)->count(); 
-    $dates = Date::where('season','=',$selected_season)->orderBy('date', 'DESC')->get();
+    $dates = Date::where('season','=',$selected_season)->orderByDesc('date')->get();
     $users = User::all();
     $array_present = [];
     $array_player_won = [];

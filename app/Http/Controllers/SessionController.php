@@ -32,7 +32,7 @@ class SessionController extends Controller
 
          $request->session()->regenerate();
 
-         $upcoming_date = Date::where('date', '>=', date('Y-m-d H:i:s'))->orderby('date', 'asc')->first();
+         $upcoming_date = Date::where('date', '>=', date('Y-m-d'))->orderby('date', 'asc')->first();
 
          if (is_null($upcoming_date)) {
 

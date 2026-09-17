@@ -120,11 +120,6 @@ margin-left: 5%;
 align-content: center;
 }
 
-.trash {
-    width: 20px; 
-    height: auto;
-}
-
 .container_activity {
    display: flex;
    justify-content: center;

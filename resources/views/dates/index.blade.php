@@ -77,7 +77,7 @@ echo date_format($single_date, "d-m-Y"); @endphp
     @csrf
 @method('DELETE')
 
-<input type="image" name="submit" class="trash" src="./trash.png"> 
+<input type="image" name="submit" src="./trash.png"> 
 
 </form>
 

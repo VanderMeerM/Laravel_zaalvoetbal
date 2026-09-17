@@ -173,7 +173,7 @@ const pieChart = new Chart(chartTeam, {
 
  <div class="container_table">
 
-<h1> Winst speler</h1> <h3>(obv aanwezigheid) </h3>
+<h1> Winst speler</h1> <h3>(o.b.v. aanwezigheid) </h3>
 
 <div class="center">
   
@@ -199,18 +199,13 @@ const pieChart = new Chart(chartTeam, {
 <div class="center">
   
 <table>
-  <tr>
-    <th>Speler</th>
-    <th>Oranje</th>
-    <th>Geel</th>
-  </tr>
 
 @foreach ($array_player_orange as $name => $orange) 
 
 <tr>
 <td> {{ $name }} </td>
-<td> {{  $orange }}% </td>
-<td> {{ 100 - $orange }}%</td>
+<td class="text-orange-500"> {{  $orange }}% </td>
+<td class="text-yellow-500"> {{ 100 - $orange }}%</td>
 </tr>
 
 @endforeach

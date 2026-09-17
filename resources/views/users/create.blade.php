@@ -14,7 +14,7 @@
      
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
-          <label for="firstname" class="block text-sm/6 font-medium text-gray-900">Voornaam</label>
+          <label for="firstname" class="block text-sm/6 font-medium text-gray-900">Voor- of bijnaam *</label>
           <div class="mt-2">
             <input id="firstname" type="text" name="firstname" autocomplete="given-name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
@@ -31,14 +31,14 @@
         </div>
 
         <div class="sm:col-span-4">
-          <label for="email" class="block text-sm/6 font-medium text-gray-900">E-mailadres</label>
+          <label for="email" class="block text-sm/6 font-medium text-gray-900">E-mail * </label>
           <div class="mt-2">
             <input id="email" type="email" name="email" autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
         </div>
 
          <div class="sm:col-span-4">
-          <label for="password" class="block text-sm/6 font-medium text-gray-900">Wachtwoord</label>
+          <label for="password" class="block text-sm/6 font-medium text-gray-900">Wachtwoord *</label>
           <div class="mt-2">
             <input id="password" type="password" name="password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>

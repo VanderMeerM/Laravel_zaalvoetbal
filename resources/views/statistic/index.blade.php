@@ -9,7 +9,7 @@
 <x-header> </x-header>
 
 <html>
-<body>
+<body style="margin-left: 1%;">
 
 <form action= '' method="post"> 
 @csrf 
@@ -41,6 +41,7 @@ Seizoen
 <div class="center">
 <canvas id="chart_presence"></canvas>
 </div>
+
 
 <script>
 
@@ -75,7 +76,18 @@ const lineChart = new Chart(chartPresence, {
 
   </script>
 
- <div style="text-align: center; margin-top: 3%">
+<div style="text-align: left; margin: 3% 0 0 1%">
+Totaal aantal doelpunten:
+
+<div style="font-size: 40px;" class="flex"> 
+<div class="text-orange-500 m-2"> {{ $total_goals_orange }} </div>
+<div class="m-2"> - </div>
+<div class="text-yellow-300 m-2"> {{ $total_goals_yellow }} </div>
+</div>
+
+</div>
+
+ <div style="text-align: left; margin: 3% 0 0 1%">
 
 Wedstrijdpercentage met minimaal 10 eigen spelers: 
 

@@ -38,6 +38,10 @@ class StatisticController extends Controller
     $array_values_player =[];
     $array_most_valuable_player = [];
 
+    $total_goals_orange = Date::where('season','=',$selected_season)->sum('result_orange');
+    $total_goals_yellow = Date::where('season','=',$selected_season)->sum('result_yellow');
+
+
    $presence_on_date = [];
 
    foreach ($dates as $date) {
@@ -122,6 +126,8 @@ class StatisticController extends Controller
         'numgames'=> $numgames, 
         'users'=> $users,
         'matches_with_min_10_players' => $matches_with_min_10_players,
+        'total_goals_orange' => $total_goals_orange,
+        'total_goals_yellow' => $total_goals_yellow,
        'array_present' => $array_present, 
        'array_player_won' => $array_player_won,
        'array_player_orange' => $array_player_orange,

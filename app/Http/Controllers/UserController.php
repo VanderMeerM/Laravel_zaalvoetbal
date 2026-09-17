@@ -24,7 +24,7 @@ class UserController extends Controller
         return redirect('./login');
     }
 
-       $users = User::orderBy('firstname')->get();
+      $users = User::orderBy('firstname')->get();
 
       $players_with_ball = User::where('hasball', '=', 'on')->count();
 
@@ -60,7 +60,7 @@ class UserController extends Controller
     }
          request()->validate([
         'firstname' => ['required'],
-        'lastname' => ['required'],
+        'email' => ['required'],
         'password' => ['required', Password::min(6)->letters()->numbers()]
     ]);
 
@@ -204,7 +204,6 @@ class UserController extends Controller
 
        request()->validate([
         'firstname' => ['filled'],
-        'lastname' => ['filled'],
         'email' => ['filled', 'email','max:254'],
        
       ]);

@@ -14,7 +14,6 @@ h1, h3 {
     font-size: 20;
     font-weight: bold;
     width: fit-content;
-    margin: 0 auto;
 }
 
 h3 {

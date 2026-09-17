@@ -219,7 +219,7 @@ const pieChart = new Chart(chartTeam, {
 
 <div class="container_table">
   
-<h1> Meest waardevolle speler </h1><h3>(obv aanwezigheid + winstpotjes)</h3> 
+<h1> Meest waardevolle speler </h1><h3>(o.b.v. aanwezigheid + winstpotjes)</h3> 
 
 <div class="center">
 <p></p>

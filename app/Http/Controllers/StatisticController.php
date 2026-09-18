@@ -29,8 +29,8 @@ class StatisticController extends Controller
         }
 
       
-    $numgames = Date::where('season','=',$selected_season)->count(); 
-    $dates = Date::where('season','=',$selected_season)->orderBy('date', 'ASC')->get();
+    $numgames = Date::where('season','=',$selected_season)->where('date', '<=', date('Y-m-d'))->count(); 
+    $dates = Date::where('season','=',$selected_season)->where('date', '<=', date('Y-m-d'))->orderBy('date', 'ASC')->get();
     $users = User::all();
     $array_present = [];
     $array_player_won = [];
@@ -54,16 +54,19 @@ class StatisticController extends Controller
       }
 
    
-   $matches_with_min_10_players = Matchround::select(DB::raw('count(`present`) as Aanwezigen'))->
-   where('present', '=', 1)->where('season', '=',$selected_season)->groupby('date_id')-> having('Aanwezigen', '>=', 10)->count(); 
+   $matches_with_min_10_players = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select(DB::raw('count(`present`) as Aanwezigen'))->
+   where('present', '=', 1)->where('matchrounds.season', '=',$selected_season)->where('dates.date', '<=', date('Y-m-d'))->groupby('date_id')-> having('Aanwezigen', '>=', 10)->count(); 
 
     foreach ($users as $user) {
 
-    $num_present = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->count();
+    $num_present = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
+    ->where('present','=',1)->where('dates.date', '<=', date('Y-m-d'))->count();
 
-    $num_player_won = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->where('result','=','W')->count();
+    $num_player_won = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
+    ->where('present','=',1)->where('result','=','W')->where('dates.date', '<=', date('Y-m-d'))->count();
 
-    $num_player_orange = Matchround::select()->where('user_id','=',$user['id'])->where('season','=',$selected_season)->where('present','=',1)->where('team_id','=', 1)->count();
+    $num_player_orange = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
+    ->where('present','=',1)->where('team_id','=', 1)->where('dates.date', '<=', date('Y-m-d'))->count();
 
 
     //   Aanwezigheid spelers.. 

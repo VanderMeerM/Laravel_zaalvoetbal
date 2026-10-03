@@ -136,7 +136,7 @@ align-content: center;
 .team_picture_login {
     max-width: 500px;
     height: auto;
-    border-radius: 50%;
+    border-radius: 30%;
     margin: 2% auto 0;
 }
 

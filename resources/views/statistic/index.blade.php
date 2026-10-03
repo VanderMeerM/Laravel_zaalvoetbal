@@ -76,6 +76,8 @@ const lineChart = new Chart(chartPresence, {
 
   </script>
 
+<div style="background-color: #dbdbdb;"> 
+
 <div style="text-align: left; margin: 3% 0 0 1%">
 Totaal aantal doelpunten:
 
@@ -95,6 +97,7 @@ Wedstrijdpercentage met minimaal 10 eigen spelers:
 {{ round(($matches_with_min_10_players/$numgames) * 100, 0) }}% 
 ({{ $matches_with_min_10_players }}/{{ $numgames }})
 
+</div>
 </div>
 </div>
 </div>
@@ -173,7 +176,7 @@ const pieChart = new Chart(chartTeam, {
 
  <div class="container_table">
 
-<h1> Winst speler</h1> <h3>(o.b.v. aanwezigheid) </h3>
+<h1> Winst speler *</h1>
 
 <div class="center">
   
@@ -219,7 +222,7 @@ const pieChart = new Chart(chartTeam, {
 
 <div class="container_table">
   
-<h1> Meest waardevolle speler </h1><h3>(o.b.v. aanwezigheid + winstpotjes)</h3> 
+<h1> Meest waardevolle speler **</h1>
 
 <div class="center">
 <p></p>
@@ -229,15 +232,23 @@ const pieChart = new Chart(chartTeam, {
 
 @foreach ($array_most_valuable_player as $name => $valuable) 
 
+@if ($name != 0)
 <tr>
 <td> {{ $name }} </td>
 <td> {{  $valuable }} </td>
 </tr>
+@endif 
 
 @endforeach
 
 </table>
+</div>
 
+<div>
+<h3> * o.b.v. aanwezigheid </h3>
+</div>
+<div>
+<h3> ** o.b.v. aanwezigheid + winstpotjes</h3> 
 </div>
 
 </body>

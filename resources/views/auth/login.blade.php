@@ -7,7 +7,7 @@
 
 <div style="display:flex; justify-content: center;">
   
-<img class="team_picture_login" src="./team.png">
+<img class="team_picture_login" src="./team2026.jpg">
 </div>
 
 <form method="post" action= "">

@@ -37,6 +37,7 @@ class StatisticController extends Controller
     $array_player_orange = [];
     $array_values_player =[];
     $array_most_valuable_player = [];
+    $array_values_player_points = [];
 
     $total_goals_orange = Date::where('season','=',$selected_season)->sum('result_orange');
     $total_goals_yellow = Date::where('season','=',$selected_season)->sum('result_yellow');
@@ -65,6 +66,9 @@ class StatisticController extends Controller
     $num_player_won = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
     ->where('present','=',1)->where('result','=','W')->where('dates.date', '<=', date('Y-m-d'))->count();
 
+    $num_player_draw = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
+    ->where('present','=',1)->where('result','=','D')->where('dates.date', '<=', date('Y-m-d'))->count();
+
     $num_player_orange = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
     ->where('present','=',1)->where('team_id','=', 1)->where('dates.date', '<=', date('Y-m-d'))->count();
 
@@ -82,12 +86,20 @@ class StatisticController extends Controller
     $array_player_won += 
     [$user['firstname'] => round(($num_player_won/$num_present) * 100, 0)];
 
+    /*
+    $array_player_draw += 
+    [$user['firstname'] => round(($num_player_draw/$num_present) * 100, 0)];
+    */
+
     // Aantal keer dat speler in oranje speelde..
     $array_player_orange += 
      [$user['firstname'] => round(($num_player_orange/$num_present) * 100, 0)];
 
      // Meest waardevolle speler..
      $array_values_player = array_merge_recursive($array_present, $array_player_won);
+
+     $array_values_player_points += 
+      [$user['firstname'] => ( (3 * $num_player_won) + $num_player_draw + $num_present)]; 
     }
     }
 
@@ -117,6 +129,7 @@ class StatisticController extends Controller
     }
     arsort($array_present);
     arsort($array_player_won);
+    arsort($array_values_player_points);
     ksort($array_player_orange);
 
     arsort($array_most_valuable_player);
@@ -138,6 +151,7 @@ class StatisticController extends Controller
        'num_team_yellow_won' => $num_team_yellow_won, 
        'num_draw' => $num_draw, 
        'array_most_valuable_player' => $array_most_valuable_player,
+       'array_values_player_points' => $array_values_player_points,
        'selected_season' => $selected_season
         ]);
     }

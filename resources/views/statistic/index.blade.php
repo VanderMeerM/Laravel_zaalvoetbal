@@ -217,9 +217,6 @@ const pieChart = new Chart(chartTeam, {
 </div> 
 </div>
 
-<p></p>
-
-
 <div class="container_table">
   
 <h1> Meest waardevolle speler **</h1>
@@ -243,12 +240,45 @@ const pieChart = new Chart(chartTeam, {
 
 </table>
 </div>
+</div>
+
+
+<div class="container_table">
+  
+<h1> Meest waardevolle speler (in punten) ***</h1>
+
+<div class="center">
+<p></p>
+
+<table>
+
+
+@foreach ($array_values_player_points as $name => $valuable) 
+
+@if ($name != 0)
+<tr>
+<td> {{ $name }} </td>
+<td> {{  $valuable }} </td>
+</tr>
+@endif 
+
+@endforeach
+
+</table>
+</div>
+
+<div>
+
+</div>
 
 <div>
 <h3> * o.b.v. aanwezigheid </h3>
 </div>
 <div>
 <h3> ** o.b.v. aanwezigheid + winstpotjes</h3> 
+</div>
+<div>
+<h3> *** aanwezig: 1 p - winst: 3 p - gelijkspel: 1 p - nederlaag: 0 p</h3> 
 </div>
 
 </body>

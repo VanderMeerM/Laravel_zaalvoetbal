@@ -63,7 +63,7 @@ class StatisticController extends Controller
     ->where('present','=',1)->where('dates.date', '<=', date('Y-m-d'))->count();
 
     $num_player_won = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
-    ->where('present','=',1)->where('result','=','W')->where('dates.date', '<=', date('Y-m-d'))->count();
+    ->where('present','=',1)->where('result','===','W')->where('dates.date', '<=', date('Y-m-d'))->count();
 
     $num_player_orange = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
     ->where('present','=',1)->where('team_id','=', 1)->where('dates.date', '<=', date('Y-m-d'))->count();

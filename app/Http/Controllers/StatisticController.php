@@ -63,6 +63,9 @@ class StatisticController extends Controller
     $num_present = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
     ->where('present','=',1)->where('dates.date', '<=', date('Y-m-d'))->count();
 
+    $num_present_fm = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
+    ->where('present','=',1)->where('dates.match_nr','=', 1)->where('dates.date', '<=', date('Y-m-d'))->count();
+
     $num_player_won = Matchround::join('dates', 'dates.id', '=','matchrounds.date_id')->select()->where('user_id','=',$user['id'])->where('matchrounds.season','=',$selected_season)
     ->where('present','=',1)->where('result','=','W')->where('dates.date', '<=', date('Y-m-d'))->count();
 
@@ -75,9 +78,9 @@ class StatisticController extends Controller
 
     //   Aanwezigheid spelers.. 
     
-    if ($num_present > 0) {
+    if ($num_present_fm > 0) {
     $array_present += 
-    [$user['firstname'] => round(($num_present/$numgames) * 100, 0)];
+    [$user['firstname'] => round(($num_present_fm/$numgames) * 100, 0)];
     }
     
     // Winstpartijen per speler..
@@ -99,7 +102,7 @@ class StatisticController extends Controller
      $array_values_player = array_merge_recursive($array_present, $array_player_won);
 
      $array_values_player_points += 
-      [$user['firstname'] => ( (3 * $num_player_won) + $num_player_draw + $num_present)]; 
+      [$user['firstname'] => ( (3 * $num_player_won) + $num_player_draw + $num_present_fm)]; 
     }
     }
 
